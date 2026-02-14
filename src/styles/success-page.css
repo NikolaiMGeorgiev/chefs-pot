@@ -1,0 +1,37 @@
+#success-page {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: calc(100% - 20px);
+    margin: 0 auto;
+    background-color: var(--light-bg-color);
+    border: 4px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--dark-text-color);
+}
+
+#success-page h1 {
+    text-align: center;
+}
+
+#success-page p {
+    width: 50%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#success-page__hero {
+    display: block;
+    height: 60%;
+    object-fit: contain;
+    padding: 10px;
+}
+
+#success-page__footer {
+    margin-top: 20px;
+}
+
+#success-page__footer > button {
+    display: block;
+    margin: 0 auto;
+}

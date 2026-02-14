@@ -1,0 +1,39 @@
+#recipe-version {
+    position: absolute;
+    top: 20px;
+}
+
+#recipe-version__original-btn {
+    border-radius: 10px 0 0 10px;
+    border-width: 2px;
+}
+
+#recipe-version__my-recipe-btn {
+    border-radius: 0 10px 10px 0;
+    border-width: 2px 2px 2px 0;
+}
+
+#recipe-version button {
+    margin: 0;
+    color: var(--dark-text-color);
+    background-color: var(--main-bg-color);
+    border-style: solid;
+    border-color: var(--border-secondary-color);
+    cursor: pointer;
+}
+
+#recipe-version button.selected {
+    background-color: var(--contrast-button-color)
+}
+
+#recipe-version button:disabled {
+    background-color: var(--main-bg-color);
+    color: var(--disabled-text-color);
+}
+
+@media (max-width: 960px) {
+    #recipe-version {
+        position: static;
+        margin-bottom: 10px;
+    }
+}

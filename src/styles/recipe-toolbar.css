@@ -1,0 +1,29 @@
+#ingredients-toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#ingredients-toolbar__cancel-btn,
+#ingredients-toolbar__portions {
+    margin-left: 5px;
+}
+
+#ingredients-toolbar__cancel-btn {
+    background-color: var(--dark-button-color);
+}
+
+#ingredients-toolbar__portions {
+    width: 60px;
+}
+
+@media (max-width: 480px) {
+    #ingredients-toolbar__modify-btn {
+        align-self: end;
+    }
+
+    #ingredients-toolbar__cancel-btn,
+    #ingredients-toolbar__modify-btn {
+        padding: 5px;
+    }
+}

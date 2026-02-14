@@ -1,0 +1,26 @@
+.popup__wrapper {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    top: 60px;
+    color: #523f29;
+    z-index: 1000;
+}
+
+.popup__container {
+    width: 400px;
+    max-width: calc(100% - 80px);
+    padding: 5px;
+    background-color: var(--contrast-button-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+
+.popup {
+    margin: 0;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: var(--light-bg-color);
+    text-align: center;
+}

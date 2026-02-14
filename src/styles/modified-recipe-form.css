@@ -1,0 +1,61 @@
+.ingredients-list.modified .ingredient-quantity {
+    width: 64px;
+}
+
+.ingredients-list.modified .ingredient-unit {
+    width: 30px;
+}
+
+.ingredients-list.modified .ingredient {
+    display: flex;
+}
+
+.ingredients-list.modified .input-control + .input-control {
+    margin-top: 20px;
+}
+
+@media (max-width: 540px) {
+    .ingredients-list.modified .ingredient {
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+        row-gap: 10px;
+        column-gap: 10px;
+        border: 1px solid var(--border-color);
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .ingredients-list.modified .name-label {
+        grid-column: 1/3;
+    }
+
+    .ingredients-list.modified .labeled-input + .labeled-input {
+        margin-left: 0;
+    }
+
+    .ingredients-list.modified .ingredient-quantity,
+    .ingredients-list.modified .selector__wrapper {
+        width: 100%;
+    }
+
+    .ingredients-list.modified .add-row-btn, 
+    .ingredients-list.modified .remove-row-btn {
+        grid-column: span 2;
+        height: 32px;
+    }
+
+    .ingredients-list.modified .add-row-btn {
+        margin: 0;
+    }
+
+    .ingredients-list.modified .step-wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 10px;
+    }
+
+    .ingredients-list.modified .step-wrapper textarea {
+        margin: 0;
+        height: 6rem;
+    }
+}

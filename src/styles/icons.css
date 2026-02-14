@@ -1,0 +1,49 @@
+.favourite-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.favourite-icon__filler {
+    fill: var(--light-bg-color);
+}
+
+.favourite-icon__filler {
+    fill: var(--light-bg-color);
+}
+
+.favourite-icon__border {
+    fill: var(--border-color);
+}
+
+.favourite-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    background-color: var(--main-bg-color);
+    cursor: pointer;
+ }
+
+.favourite-btn.active .favourite-icon__filler {
+    fill: var(--contrast-button-color);
+}
+
+.plus-icon path, 
+.x-icon path {
+    fill: var(--dark-text-color);
+}
+
+.icon-btn {
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.date-icon path {
+    stroke: var(--border-color)
+}

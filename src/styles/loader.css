@@ -1,0 +1,134 @@
+.loader {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+}
+
+.loader__center {
+    position: absolute;
+    top: calc(50% - 7px);
+    left: calc(50% - 7px);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, #fcf788, var(--contrast-color-dark));
+    animation: expand-center 1800ms ease-in-out infinite;
+}
+
+.loader__dot {
+    display: block;
+    position: absolute;
+    top: calc(50% - 4px);
+    left: calc(50% - 4px);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--contrast-color-dark);
+    animation-duration: 1800ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.loader__dot.dot-1 {
+    transform: rotate(0deg) translate(15px) rotate(0deg);
+    animation-name: spin-dot;
+}
+
+.loader__dot.dot-2 {
+    transform: rotate(60deg) translate(15px) rotate(-60deg);
+    animation-name: spin-dot-2;
+}
+
+.loader__dot.dot-3 {
+    transform: rotate(120deg) translate(15px) rotate(-120deg);
+    animation-name: spin-dot-3;
+}
+
+.loader__dot.dot-4 {
+    transform: rotate(180deg) translate(15px) rotate(-180deg);
+    animation-name: spin-dot-4;
+}
+
+.loader__dot.dot-5 {
+    transform: rotate(240deg) translate(15px) rotate(-240deg);
+    animation-name: spin-dot-5;
+}
+
+.loader__dot.dot-6 {
+    transform: rotate(300deg) translate(15px) rotate(-300deg);
+    animation-name: spin-dot-6;
+}
+
+@keyframes spin-dot {
+    0% {
+        transform: rotate(0deg) translate(15px) rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg) translate(15px) rotate(-360deg);
+    }
+}
+
+@keyframes spin-dot-2 {
+    0% {
+        transform: rotate(60deg) translate(15px) rotate(60deg);
+    }
+
+    100% {
+        transform: rotate(420deg) translate(15px) rotate(-420deg);
+    }
+}
+
+@keyframes spin-dot-3 {
+    0% {
+        transform: rotate(120deg) translate(15px) rotate(120deg);
+    }
+
+    100% {
+        transform: rotate(480deg) translate(15px) rotate(-480deg);
+    }
+}
+
+@keyframes spin-dot-4 {
+    0% {
+        transform: rotate(180deg) translate(15px) rotate(180deg);
+    }
+    
+    100% {
+        transform: rotate(540deg) translate(15px) rotate(-540deg);
+    }
+}
+
+@keyframes spin-dot-5 {
+    0% {
+        transform: rotate(240deg) translate(15px) rotate(240deg);
+    }
+
+    100% {
+        transform: rotate(600deg) translate(15px) rotate(-600deg);
+    }
+}
+
+@keyframes spin-dot-6 {
+    0% {
+        transform: rotate(300deg) translate(15px) rotate(300deg);
+    }
+
+    100% {
+        transform: rotate(660deg) translate(15px) rotate(-660deg);
+    }
+}
+
+@keyframes expand-center {
+    0% {
+        scale: 100%;
+    }
+
+    50% {
+        scale: 40%;
+    }
+
+    100% {
+        scale: 100%;
+    }
+}

@@ -1,0 +1,108 @@
+#recipe {
+    position: relative;
+    height: calc(100% - 40px);
+    box-sizing: border-box;
+    display: flex;
+    margin: 20px;
+
+    background-color: var(--node-bg-color);
+    
+    border: 4px solid var(--border-secondary-color);
+    border-radius: 10px;
+}
+
+#recipe__cover {
+    height: 100%;
+    width: 40%;
+    object-fit: cover;
+    border-radius: 10px 0 0 10px;
+}
+
+#recipe__container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 40px;
+}
+
+#recipe__header {
+    display: grid;
+    grid-template-columns: 1fr 72px;
+    position: relative;
+    margin: 5px 0 20px 0;
+    padding: 0 0 5px 0;
+    border-bottom: 2px solid var(--main-bg-color);
+}
+
+#recipe__header h1 {
+    margin: 0;
+    color: var(--main-bg-color);
+}
+
+#recipe__container h2 {
+    margin: 0 0 10px 0;
+    color: var(--dark-text-color);
+}
+
+.recipe__section {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 0 20px 20px 20px;
+
+    border: 2px solid var(--border-secondary-color);
+    background-color: var(--main-bg-color);
+
+    overflow-y: hidden;
+}
+
+#steps-list {
+    margin: 0;
+}
+
+#recipe-form {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#recipe-form .scrollable {
+    height: 100%;
+}
+
+#recipe .favourite-btn {       
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+@media (max-width: 960px) {
+    #recipe {
+        height: 100%;
+        flex-direction: column;
+        margin: 0;
+        border-radius: 0;
+        border: none;
+        overflow-y: auto;
+    }
+
+    #recipe__cover {
+        height: 30vh;
+        width: 100%;
+        border-radius: 0%;
+    }
+
+    #recipe__container {
+        height: 100%;
+        margin: 0;
+        padding: 10px;
+    }
+
+    .recipe__section {
+        padding: 10px;
+    }
+}

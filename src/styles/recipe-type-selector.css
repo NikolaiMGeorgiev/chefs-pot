@@ -1,0 +1,33 @@
+#recipe-type {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin: 10px 0 0;
+}
+
+#recipe-type > span {
+    margin-right: 5px;
+    color: var(--dark-text-color);
+}
+
+#recipe-type button {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+#recipe-type button + button{
+    margin-left: 10px;
+}
+
+#recipe-type button.selected {
+    background-color: var(--contrast-button-color);
+}
+
+#recipe-type .plus-icon, 
+#recipe-type .x-icon {
+    height: 12px;
+    width: 12px;
+    margin-right: 2px;
+}

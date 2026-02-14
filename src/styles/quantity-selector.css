@@ -1,0 +1,26 @@
+#quantity-selector {
+    display: flex;
+    align-items: center;
+}
+
+#quantity-selector .qunatity-btn {
+    margin-right: 5px;
+    padding: 5px;
+}
+
+#quantity-selector .qunatity-btn.selected {
+    background-color: var(--contrast-button-color);
+}
+
+#quantity-selector__text {
+    font-weight: bold;
+    margin-right: 5px;
+    color: var(--dark-text-color);
+}
+
+@media (max-width: 480px) {
+    #quantity-selector {
+        flex-direction: column;
+        align-items: start;
+    }
+}

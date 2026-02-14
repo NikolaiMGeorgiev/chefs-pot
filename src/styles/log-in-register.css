@@ -1,0 +1,14 @@
+#register-form .input-control {
+    width: 100%;
+}
+
+@media (min-width: 541px) {
+    #register-container {
+        width: 420px;
+        height: auto;
+    }
+
+    #login-container {
+        width: 420px;
+    }
+}

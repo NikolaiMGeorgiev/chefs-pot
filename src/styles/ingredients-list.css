@@ -1,0 +1,24 @@
+.ingredients-list {
+    margin-block: 0;
+    padding-inline: 0;
+    margin-bottom: 10px;
+}
+
+ul.ingredients-list {
+    list-style: none;
+}
+
+.ingredients-list .ingredient {
+    display: flex;
+    margin: 5px 0;
+}
+
+.ingredients-list .ingredient__text {
+    padding: 2px 4px;
+    background-color: var(--light-bg-color);
+
+    border-width: 1px 1px 2px 1px;
+    border-style: solid;
+    border-color: var(--border-color);
+    border-radius: 10px;
+}

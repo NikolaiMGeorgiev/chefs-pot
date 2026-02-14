@@ -1,0 +1,13 @@
+.single-row-title {
+    height: 1em;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    box-sizing: content-box;
+    text-align: center;
+}
+
+
+.single-row-title span {
+    word-break: break-all;
+}
