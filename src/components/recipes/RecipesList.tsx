@@ -1,18 +1,28 @@
 import RecipesFilter from "../recipes-filter/RecipesFilter";
 import RecipeSummary from "./RecipeSummary";
 import Loader from "../common/Loader";
+import type { RecipeSummaryData, RecipeType } from "../../types/recipe";
+import type { UIEvent } from "react";
 
-export default function RecipesList({ data, updateUrl, type, updateCursor, isLoading }) {
-    const handleScroll = (e) => {
+type Props  = {
+    data: RecipeSummaryData[],
+    updateUrl: string,
+    type: RecipeType,
+    updateCursor: Function,
+    isLoading: boolean
+}
+
+export default function RecipesList({ data, updateUrl, type, updateCursor, isLoading }: Props ) {
+    const handleScroll = (e: UIEvent<HTMLDivElement>) => {
         if (!data.length) {
             return;
         }
-        const target = e.target;
+        const target = e.target as HTMLDivElement;
         const height = target.clientHeight;
         const scrollPosition = Math.ceil(target.scrollTop);
         const totalHeight = target.scrollHeight
         if (height + scrollPosition >= totalHeight) {
-            const lastItem = data[data.length - 1];
+            const lastItem = data[data.length - 1] as Recipe;
             updateCursor(lastItem.id);
         }
     }

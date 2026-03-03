@@ -302,7 +302,7 @@ app.get('/*sourcePath', (req, res) => {
 app.listen(HSOT_PORT, () => {})
 
 const noCookieEndpoints = [
-    /^\/recipes$/,
+    /^\/recipes\??.*$/,
     /^\/api\/recipes\/[0-9]+$/,
     /\/api\/my-recipes/,
     /\/filtered-recipes/
