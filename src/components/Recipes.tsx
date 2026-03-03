@@ -14,12 +14,12 @@ export default function Recipes() {
         setData,
     } = useDataFetch(url);
 
-    const updateUrl = (newUrl) => {
+    const updateUrl = (newUrl: string) => {
         setData([]);
         setUrl(newUrl);
     }
 
-    const updateCursor = (newCursor) => {
+    const updateCursor = (newCursor: number) => {
         if (url.indexOf("cursor") != -1) {
             setUrl(url.replace(/cursor=[0-9]+/, `cursor=${newCursor}`));
         } else if (url.indexOf("?") != -1) {

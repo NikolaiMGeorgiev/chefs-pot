@@ -1,6 +1,9 @@
 import { HOST, HSOT_PORT } from "../../config.js";
+import type { FavouriteButtonAction } from "../types/common.js";
+import type { LoginData, ProfileData, RegistrationData } from "../types/data.js";
+import type { Ingredient, RecipeModifyData } from "../types/recipe.js";
 
-export function updateRecipe(data) {
+export function updateRecipe(data: RecipeModifyData) {
     const formData = data.isOwn ?
     {
         ingredients: data.ingredients,
@@ -27,10 +30,10 @@ export function updateRecipe(data) {
     });
 }
 
-export function sendNewRecipe(data) {
+export function sendNewRecipe(data: RecipeModifyData) {
     const formData = new FormData();
-    for (let key of Object.keys(data)) {
-        formData.append(key, data[key] instanceof Array ? JSON.stringify(data[key]) : data[key]);
+    for (let key of Object.keys(data) as (keyof RecipeModifyData)[]) {
+        formData.append(key, data[key] instanceof Array ? JSON.stringify(data[key]) : data[key] as string);
     }
     return fetch(`${HOST}:${HSOT_PORT}/recipe`, {
         method: "POST",
@@ -38,7 +41,7 @@ export function sendNewRecipe(data) {
     });
 }
 
-export function sendRegistration(data) {
+export function sendRegistration(data: RegistrationData) {
     return fetch(`${HOST}:${HSOT_PORT}/register`, {
         method: "POST",
         headers: {
@@ -48,7 +51,7 @@ export function sendRegistration(data) {
     });
 }
 
-export function sendLogin(data) {
+export function sendLogin(data: LoginData) {
     return fetch(`${HOST}:${HSOT_PORT}/login`, {
         method: "POST",
         headers: {
@@ -58,7 +61,7 @@ export function sendLogin(data) {
     });
 }
 
-export function sendProfileUpdate(data) {
+export function sendProfileUpdate(data: ProfileData) {
     return fetch(`${HOST}:${HSOT_PORT}/profile`, {
         method: "POST",
         headers: {
@@ -68,7 +71,7 @@ export function sendProfileUpdate(data) {
     });
 }
 
-export function sendFavourite(recipeId, action) {
+export function sendFavourite(recipeId: number, action: FavouriteButtonAction) {
     return fetch(`${HOST}:${HSOT_PORT}/api/favourite`, {
         method: "POST",
         headers: {
@@ -78,49 +81,14 @@ export function sendFavourite(recipeId, action) {
     });
 }
 
-export function getIngredients(ingredient) {
+export function getIngredients(ingredient: string) {
     return fetch(`${HOST}:${HSOT_PORT}/api/search-ingredients/${ingredient}`);
 }
 
-export function extractRecipeDataFromForm(form) {
-    const formData = new FormData(form);
-    const modifiedData = {
-        ingredients: [],
-        spices: [],
-        steps: [],
-        portions: formData.get("portions")
-    };
-    const formIngredients = formData.getAll("ingredient-name");
-    const formIngredientsQuantities = formData.getAll("ingredient-quantity");
-    const formIngredientsUnits = formData.getAll("ingredient-unit");
-    const formSpices = formData.getAll("spice-name");
-    const formSpiceQuantities = formData.getAll("spice-quantity");
-    const formSpiceUnits = formData.getAll("spice-unit");
-    const formSteps = formData.getAll("step");
-    for (let i in formIngredients) {
-        modifiedData.ingredients.push({
-            name: formIngredients[i],
-            quantity: formIngredientsQuantities[i],
-            unit: formIngredientsUnits[i]
-        });
-    }
-    for (let i in formSpices) {
-        modifiedData.spices.push({
-            name: formSpices[i],
-            quantity: formSpiceQuantities[i],
-            unit: formSpiceUnits[i]
-        });
-    }
-    for (let step of formSteps) {
-        modifiedData.steps.push(step);
-    }
-    return modifiedData;
-}
-
-export function normalizeIngredients(ingredients) {
+export function normalizeIngredients(ingredients: Ingredient[]) {
     return ingredients.map(ingredient => ({ ...ingredient, unit: ingredient.unit || 'none'}));
 }
 
-export function isResponseJSON(response) {
-    return response.headers.get("content-type") && response.headers.get("content-type").toLowerCase().includes("json");
+export function isResponseJSON(response: Response) {
+    return response.headers.get("content-type") && response.headers.get("content-type")?.toLowerCase().includes("json");
 }

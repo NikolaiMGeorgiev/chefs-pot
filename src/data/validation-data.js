@@ -4,7 +4,7 @@ import {
     sendProfileUpdate, 
     sendRegistration, 
     updateRecipe 
-} from "../helpers/data.js";
+} from "../helpers/data";
 import { validateLoginForm, 
     validateModifiedRecipeForm, 
     validateNewRecipeForm, 

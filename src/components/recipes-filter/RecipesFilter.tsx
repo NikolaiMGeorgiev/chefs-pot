@@ -10,12 +10,17 @@ import recipeFilterReducer from "../../reducers/recipeFilterReducer";
 import IngredientsSearchBox from "./IngredientsSearchBox";
 import FilteredIngredients from "./FilteredIngredients";
 import SelectedIngredients from "./SelectedIngredients";
+import type { RecipeType } from "../../types/recipe";
 
+type Props = {
+    updateUrl: Function,
+    recipesType: RecipeType
+}
 
 export default function RecipesFilter({
     updateUrl,
     recipesType
-}) {
+}: Props) {
     const [filter, dispatch] = useReducer(recipeFilterReducer, {
         value: "",
         isExpanded: false,
@@ -26,7 +31,7 @@ export default function RecipesFilter({
     
     useFilteredIngredientsSearch(filter.value, dispatch);
 
-    const filterRecipes = (selectedIngredients) => {
+    const filterRecipes = (selectedIngredients: string[]) => {
         const urlParamsList = [`type=${recipesType}`];
         if (selectedIngredients.length) {
             urlParamsList.push(selectedIngredients.map(ingredient => `ingr=${ingredient}`).join("&"))
@@ -35,7 +40,7 @@ export default function RecipesFilter({
         updateUrl(`${HOST}:${HSOT_PORT}/api/filtered-recipes${urlParams}`);
     }
 
-    const getFilterIcon = (type) => {
+    const getFilterIcon = (type: "open" | "close") => {
         return (
             <div 
                 className={`recipe-filter__filter-icon ${type}`} 
@@ -50,7 +55,7 @@ export default function RecipesFilter({
         <div id="recipe-filter">
             { !filter.isExpanded && getFilterIcon("open") }
             <div id="recipe-filter__wrapper" className={filter.isExpanded ? "expanded" : ""}>
-                <p2>Filter</p2>
+                <h2>Filter</h2>
                 { getFilterIcon("close") }
                 <div id="recipe-filter__container">
                     <IngredientsSearchBox filterValue={filter.value} dispatch={dispatch} />

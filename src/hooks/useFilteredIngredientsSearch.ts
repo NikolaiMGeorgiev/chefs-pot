@@ -2,8 +2,8 @@ import { useEffect, useEffectEvent } from "react";
 import { getIngredients, isResponseJSON } from "../helpers/data";
 
 
-export default function useFilteredIngredientsSearch(filterValue, dispatch) {
-    const sendFilterRequest = useEffectEvent((value) => {
+export default function useFilteredIngredientsSearch(filterValue: string, dispatch: Function) {
+    const sendFilterRequest = useEffectEvent((value: string) => {
         getIngredients(value)
             .then(response => {
                 if (isResponseJSON(response)) {
