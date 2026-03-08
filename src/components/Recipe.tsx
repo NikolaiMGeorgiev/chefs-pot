@@ -1,15 +1,15 @@
 import "../styles/recipe.css";
 
 import { useNavigate, useParams } from "react-router-dom";
-import Ingredients from "./recipe/Ingredients.js";
-import Steps from "./recipe/Steps.js";
+import Ingredients from "./recipe/Ingredients";
+import Steps from "./recipe/Steps";
 import { useState } from "react";
 import { normalizeIngredients } from "../helpers/data.js";
-import RecipeVersion from "./recipe/RecipeVersion.js";
-import SectionSelector from "./recipe/SectionSelector.js";
-import RecipeAvatar from "./recipe/RecipeAvatar.js";
-import RecipeToolbar from "./recipe/RecipeToolbar.js";
-import { DataLoader } from "./common/DataLoader.js";
+import RecipeVersion from "./recipe/RecipeVersion";
+import SectionSelector from "./recipe/SectionSelector";
+import RecipeAvatar from "./recipe/RecipeAvatar";
+import RecipeToolbar from "./recipe/RecipeToolbar";
+import { DataLoader } from "./common/DataLoader";
 import { HOST, HSOT_PORT } from "../../config.js";
 import ValidatedForm from "./common/ValidatedForm.js";
 import Popup from "./common/Popup.js";
@@ -19,19 +19,25 @@ import { getInitialRecipeVersion } from "../helpers/recipe.js";
 import ModifiedRecipeForm from "./recipe/ModifiedRecipeForm.js";
 import { v4 as uuid } from "uuid";
 import Modal from "./common/Modal.js";
+import type { RecipeModifyData, RecipeResponseData } from "../types/recipe";
 
 export default function RecipeLoader() {
     const { id } = useParams();
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<RecipeResponseData | {}>({});
 
     return (
         <DataLoader setData={setData} url={`${HOST}:${HSOT_PORT}/api/recipes/${id}`}>
-            <Recipe initialData={data} id={id} />
+            <Recipe initialData={data as RecipeResponseData} id={Number.parseInt(id as string)} />
         </DataLoader>
     )
 }
 
-export function Recipe({ initialData, id }) {
+type Props = {
+    initialData: RecipeResponseData, 
+    id: number
+}
+
+export function Recipe({ initialData, id }: Props) {
     const navigator = useNavigate();
     const { user, isOwn, isModifiable } = initialData;
     const initialModifiedData = initialData.modifiedRecipeData;
@@ -53,7 +59,7 @@ export function Recipe({ initialData, id }) {
     } = initialData.recipeData;
 
     const [section, setSection] = useState("ingredients");
-    const [version, setVersion] = useState(getInitialRecipeVersion(initialModifiedData));
+    const [version, setVersion] = useState<RecipeVersion>(getInitialRecipeVersion(initialModifiedData));
     const [edit, setEdit] = useState(false);
     const isModifiedRecipe = version == "original" || !initialModifiedData;
     const [data, setData] = useState(
@@ -71,7 +77,7 @@ export function Recipe({ initialData, id }) {
         updatePortions
     } = useRecipePortions(isModifiedRecipe, portions, initialModifiedData?.portions);
 
-    const handleModifiedRecipeResponse = (data) => {
+    const handleModifiedRecipeResponse = (data: RecipeModifyData) => {
         if (version == "original") {
             setVersion("my");
         }
@@ -88,20 +94,20 @@ export function Recipe({ initialData, id }) {
 
     const handleCancelEdit = () => {
         setData(version == "original" || !modifiedRecipeData ?
-            { ingredients, spices, steps } :
+            { ingredients, spices, steps, id } :
             modifiedRecipeData
         );
         setEdit(false);
     };
 
-    const handleVersionChange = (newVersion) => {
+    const handleVersionChange = (newVersion: RecipeVersion) => {
         if (newVersion == version) {
             return;
         }
         
         const isModifiedRecipe = newVersion == "original" || !modifiedRecipeData;
         setVersion(newVersion);
-        setData(isModifiedRecipe ? { ingredients, spices, steps } : modifiedRecipeData);
+        setData(isModifiedRecipe ? { ingredients, spices, steps, id } : modifiedRecipeData);
         updatePortions(isModifiedRecipe ? portions : modifiedRecipeData.portions);
     }
 
@@ -134,22 +140,23 @@ export function Recipe({ initialData, id }) {
     }
     
     const getSectionComponent = () => {
-        let moduleComponent = "";
-        if (edit) {
-            if (isModifiable) {
-                return getModifiedRecipeForm()
-            }
-            moduleComponent = <Modal 
+        if (edit && isModifiable) {
+            return getModifiedRecipeForm()
+        }
+        
+        const moduleComponent = (
+            <Modal 
                 type="modal" 
                 title="Invalid action" 
                 message="Log in to gain access to recipe modification."
                 onCancel={() => setEdit(false)}
                 onSubmit={() => navigator("/login")}
-            />
-        }
+            />)
+
+
         return (
             <>
-                {moduleComponent}
+                {edit && moduleComponent}
                 <RecipeToolbar
                     portions={finalPortions}
                     isOwn={isOwn}
@@ -183,7 +190,7 @@ export function Recipe({ initialData, id }) {
                         <RecipeVersion 
                             version={version} 
                             onVersionChange={handleVersionChange} 
-                            modifiedRecipe={modifiedRecipeData}
+                            hasModifiedData={modifiedRecipeData ? true : false}
                         />}
                     <div id="recipe__header">
                         <h1>{title}</h1>

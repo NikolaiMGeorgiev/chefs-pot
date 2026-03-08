@@ -1,4 +1,4 @@
-export default function Steps({ steps }) {    
+export default function Steps({ steps }: { steps: string[] }) {    
     return (
         <section className="scrollable">
             <h2>Steps:</h2>

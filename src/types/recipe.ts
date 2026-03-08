@@ -1,3 +1,33 @@
+type Recipe = {
+    id: number,
+    title: string,
+    image: string,
+    ingredients: Ingredient[],
+    spices: Ingredient[],
+    favouriteCount: number,
+    favourite: boolean
+}
+
+type RecipeModifiedData = {
+    id: number, 
+    ingredients: Ingredient[], 
+    spices: Ingredient[], 
+    steps: string[], 
+    portions: number
+}
+
+type ModifyStepData = {
+    id: number,
+    text: string
+}
+
+type RecipeData = RecipeSummaryData & {
+    "creator_id": number,
+    user: string,
+    isOwn: boolean,
+    isModifiable: boolean
+}
+
 export type Ingredient = {
     name: string,
     quantity: number,
@@ -14,31 +44,35 @@ export enum Unit {
     none = "none"
 }
 
-export type RecipeSummaryData = {
-    id: number,
-    title: string,
-    image: string,
-    ingredients: Ingredient[],
-    spices: Ingredient[],
+export type RecipeSummaryData = Recipe & {
     portions: number,
-    created: Date,
-    favouriteCount: number | null
-}
-
-export type RecipeData = RecipeSummaryData & {
-    "creator_id": number,
-    user: string,
-    isOwn: boolean,
-    isModifiable: boolean
-}
-
-type ModifyStepData = {
-    id: number,
-    text: string
+    created: Date
 }
 
 export type RecipeModifyData = RecipeData & {
     steps: ModifyStepData[],
+}
+
+export type RecipeOriginalData = RecipeData & {
+    steps: string[],
+}
+
+export type RecipeResponseData = {
+    recipeData: RecipeOriginalData,
+    modifiedRecipeData: RecipeModifiedData,
+    user: string,
+    isOwn: boolean,
+    favourite: boolean,
+    isModifiable: boolean
+}
+
+export type NewRecipeData = {
+    title: string, 
+    ingredients: Ingredient[], 
+    spices: Ingredient[], 
+    steps: ModifyStepData[],
+    portions: number,
+    image: string,
 }
 
 export type RecipeType = "original" | "my";

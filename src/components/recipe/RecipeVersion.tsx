@@ -1,6 +1,13 @@
 import "../../styles/recipe-version.css";
+import type { RecipeType } from "../../types/recipe";
 
-export default function RecipeVersion({ version, onVersionChange, modifiedRecipe }) {
+type Props = {
+    version: RecipeType, 
+    onVersionChange: Function, 
+    hasModifiedData: boolean
+}
+
+export default function RecipeVersion({ version, onVersionChange, hasModifiedData }: Props) {
     return (
         <div id="recipe-version">
             <button
@@ -11,7 +18,7 @@ export default function RecipeVersion({ version, onVersionChange, modifiedRecipe
             <button
                 id="recipe-version__my-recipe-btn"
                 className={version == "my" ? "selected" : ""}
-                disabled={modifiedRecipe ? false : "disabled"}
+                disabled={!hasModifiedData}
                 title="Modify recipe to create your own version"
                 onClick={() => onVersionChange("my")}
             >My recipe</button>

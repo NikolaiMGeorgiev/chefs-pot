@@ -27,7 +27,11 @@ export function getUserRecipeSummaryQuery(selectedRecipeTypes) {
     const queryList = [];
     if (selectedRecipeTypes.favourite) {
         queryList.push(
-            `(SELECT r.id, title, image, r.ingredients, r.spices, r.portions, created, favouriteCount, rf.recipe_id as favourite
+            `(SELECT r.id, title, image, r.ingredients, r.spices, r.portions, created, favouriteCount, 
+            CASE
+                WHEN rf.recipe_id IS NULL THEN false
+                ELSE true
+            END as favourite
             FROM recipes_favourite rf
             LEFT JOIN recipes r ON r.id = rf.recipe_id AND rf.user_id = ?
             LEFT JOIN recipes_modified rm ON rf.id = rm.original_id
@@ -40,7 +44,11 @@ export function getUserRecipeSummaryQuery(selectedRecipeTypes) {
     }
     if (selectedRecipeTypes.modified) {
         queryList.push(
-            `(SELECT r.id, title, image, rm.ingredients, rm.spices, rm.portions, created, favouriteCount, rf.recipe_id as favourite
+            `(SELECT r.id, title, image, rm.ingredients, rm.spices, rm.portions, created, favouriteCount, 
+            CASE
+                WHEN rf.recipe_id IS NULL THEN false
+                ELSE true
+            END as favourite
             FROM recipes_modified rm 
             JOIN recipes r ON rm.original_id = r.id 
             LEFT JOIN recipes_favourite rf ON r.id = rf.recipe_id AND rf.user_id = ?
@@ -50,7 +58,11 @@ export function getUserRecipeSummaryQuery(selectedRecipeTypes) {
     }
     if (selectedRecipeTypes.own) {
         queryList.push(
-            `(SELECT r.id, r.title, r.image, r.ingredients, r.spices, r.portions, created, favouriteCount, rf.recipe_id as favourite
+            `(SELECT r.id, r.title, r.image, r.ingredients, r.spices, r.portions, created, favouriteCount, 
+            CASE
+                WHEN rf.recipe_id IS NULL THEN false
+                ELSE true
+            END as favourite
             FROM recipes r 
             LEFT JOIN recipes_modified rm ON rm.original_id = r.id
             LEFT JOIN recipes_favourite rf ON r.id = rf.recipe_id AND rf.user_id = ?
@@ -112,7 +124,10 @@ function getFavouriteCountQuery() {
 function getIsFavouriteQuery() {
     return `
         LEFT JOIN (
-            SELECT recipe_id as favourite
+            SELECT CASE
+                WHEN recipe_id IS NULL THEN false
+                ELSE true
+            END as favourite
             FROM recipes_favourite 
             WHERE user_id = ?
         ) rf ON r.id = rf.favourite

@@ -1,13 +1,22 @@
+import type { Unit } from "../../types/recipe";
+
+type Props = {
+    name: string, 
+    quantity: number, 
+    unit: Unit, 
+    portionModificator: number, 
+}
+
 export default function Ingredient({ 
     name, 
     quantity, 
     unit, 
     portionModificator, 
-}) {
+}: Props) {
     const fixedQuantity = quantity ? (
         Number.isInteger(quantity * portionModificator) ? 
             quantity * portionModificator : 
-            Number.parseFloat(quantity * portionModificator).toFixed(1)
+            (quantity * portionModificator).toFixed(1)
         ) : "";
 
     return (

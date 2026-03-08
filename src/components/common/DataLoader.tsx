@@ -1,22 +1,28 @@
-import { useEffect, useEffectEvent, useState } from "react";
+import { useEffect, useEffectEvent, useState, type ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import { isResponseJSON } from "../../helpers/data";
 import Loader from "./Loader";
 
-export function DataLoader({ setData, url, children }) {
+type Props = {
+    setData: Function, 
+    url: string, 
+    children: ReactElement
+}
+
+export function DataLoader({ setData, url, children }: Props) {
     const navigator = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState("");
 
-    const updateIsLoading = useEffectEvent((value) => {
+    const updateIsLoading = useEffectEvent((value: boolean) => {
         setIsLoading(value);
     });
     
-    const updateData = useEffectEvent((value) => {
+    const updateData = useEffectEvent((value: object) => {
         setData(value);
     });
     
-    const updateError = useEffectEvent((value) => {
+    const updateError = useEffectEvent((value: string) => {
         setError(value);
     });
 

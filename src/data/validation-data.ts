@@ -4,7 +4,7 @@ import {
     sendProfileUpdate, 
     sendRegistration, 
     updateRecipe 
-} from "../helpers/data";
+} from "../helpers/data.js";
 import { validateLoginForm, 
     validateModifiedRecipeForm, 
     validateNewRecipeForm, 
@@ -104,7 +104,7 @@ export const profileValidationData = {
     }
 };
 
-export function getComponentFormData(formId) {
+export function getComponentFormData(formId: string) {
     return formId in formData ? formData[formId] : {};
 }
 

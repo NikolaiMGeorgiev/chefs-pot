@@ -3,6 +3,9 @@ import IngredientsSummary from "./IngredientsSummary"
 import SingleRowTitle from "../common/SingleRowTitle";
 import FavouriteButton from "../common/FavouriteButton";
 import RecipeInfo from "./RecipeInfo";
+import type { RecipeSummaryData, RecipeType } from "../../types/recipe";
+
+type Props = RecipeSummaryData & { type: RecipeType }
 
 export default function RecipeSummary({ 
     id, 
@@ -14,7 +17,7 @@ export default function RecipeSummary({
     favourite, 
     favouriteCount, 
     created 
-}) {
+}: Props) {
     const navigator = useNavigate();
 
     return (
