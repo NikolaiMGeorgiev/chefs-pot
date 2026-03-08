@@ -1,10 +1,18 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, type UIEvent } from "react";
 import ArrowIcon from "../icons/ArrowIcon";
+import type { Ingredient } from "../../types/recipe";
 
-export default function IngredientsSummary({ ingredients, spices }) {
+type Props = {
+    ingredients: Ingredient[], 
+    spices: Ingredient[]
+}
+
+type ScrollButtonType = "up" | "down";
+
+export default function IngredientsSummary({ ingredients, spices }: Props) {
     const data = [...ingredients, ...spices];
-    const listRef = useRef(null);
-    const summaryRef = useRef(null);
+    const listRef = useRef<HTMLUListElement>(null);
+    const summaryRef = useRef<HTMLDivElement>(null);
     const [showScrollButton, setShowScrollButton] = useState(false);
 
 
@@ -17,17 +25,17 @@ export default function IngredientsSummary({ ingredients, spices }) {
         }
     }, [])
 
-    const handleScrollButtonClick = (e, type) => {
+    const handleScrollButtonClick = (e: UIEvent<HTMLButtonElement>, type: ScrollButtonType) => {
         e.stopPropagation();
         const scrollBy = type == "up" ? -100 : 100;
-        listRef.current.scrollBy({
+        listRef.current?.scrollBy({
             top: scrollBy,
             left: 0,
             behavior: "smooth",
         });
     }
 
-    const getScrollButton = (type) => {
+    const getScrollButton = (type: ScrollButtonType) => {
         if (!showScrollButton) {
             return null;
         }

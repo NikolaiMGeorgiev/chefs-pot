@@ -1,12 +1,19 @@
 import "../../styles/ingredients-list.css";
+import type { Ingredient as IngredientType } from "../../types/recipe";
 
 import Ingredient from "./Ingredient";
+
+type Props = {
+    ingredients: IngredientType[],
+    spices: IngredientType[],
+    portionModificator: number
+}
 
 export default function Ingredients({
     ingredients,
     spices,
     portionModificator
-}) {
+}: Props) {
     return (
         <section className="scrollable">
             <h2>Ingredients:</h2>

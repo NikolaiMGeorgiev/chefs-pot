@@ -1,6 +1,11 @@
 import "../../styles/section-selector.css";
 
-export default function SectionSelector({ section, setSection }) {
+type Props = {
+    section: "ingredients" | "steps", 
+    setSection: Function
+}
+
+export default function SectionSelector({ section, setSection }: Props) {
     return (
         <div id="section-selector">
             <button

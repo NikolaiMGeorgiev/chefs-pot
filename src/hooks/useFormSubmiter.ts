@@ -2,7 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { isResponseJSON } from "../helpers/data";
 
-export default function useFormSubmiter(data, sendData, handleResponse, submitSuccessMessage) {
+export default function useFormSubmiter(
+    data: { [field: string]: any }, 
+    sendData: Function, 
+    handleResponse: Function, 
+    submitSuccessMessage: boolean
+) {
     const navigator = useNavigate();
     const [errors, setErrors] = useState({});
     const [showErrorModal, setShowErrorModal] = useState(false);
@@ -14,7 +19,7 @@ export default function useFormSubmiter(data, sendData, handleResponse, submitSu
         onCancel: () => setShowErrorModal(false)
     };
 
-    const handleInvalidRequest = (status) => {
+    const handleInvalidRequest = (status: number) => {
         switch(status) {
             case 401: {
                 if ("password" in data) {
@@ -34,18 +39,18 @@ export default function useFormSubmiter(data, sendData, handleResponse, submitSu
 
      const submitForm = () => {
         sendData(data)
-            .then(response => {
+            .then((response: Response) => {
                 handleInvalidRequest(response.status);
                 return response;
             })
-            .then(response => response.ok ? 
+            .then((response: Response) => response.ok ? 
                 (
                     isResponseJSON(response) ? 
                     response.json() : 
                     data
                 ) :  
                 null)
-            .then(data => {
+            .then((data: object) => {
                 if (submitSuccessMessage) {
                     setShowSubmitPopup(true);
                 }
@@ -53,7 +58,7 @@ export default function useFormSubmiter(data, sendData, handleResponse, submitSu
                     handleResponse(data);
                 }
             })
-            .catch(error => {
+            .catch((error: Error) => {
                 console.error(error);
                 setShowErrorModal(true);
             })

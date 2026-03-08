@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import type { RecipeSummaryData } from "../types/recipe";
 
-export default function useDataFetch(url) {
-    const [data, setData] = useState([]);
+export default function useDataFetch(url: string) {
+    const [data, setData] = useState<RecipeSummaryData[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -14,7 +15,7 @@ export default function useDataFetch(url) {
                 }
                 return response.json();
             })
-            .then(responseData => {
+            .then((responseData: RecipeSummaryData[]) => {
                 const timePassed = Date.now() - startTime;
                 if (timePassed < 1000) {
                     setTimeout(() => {

@@ -6,7 +6,7 @@ import type { UIEvent } from "react";
 
 type Props  = {
     data: RecipeSummaryData[],
-    updateUrl: string,
+    updateUrl: Function,
     type: RecipeType,
     updateCursor: Function,
     isLoading: boolean
@@ -22,7 +22,7 @@ export default function RecipesList({ data, updateUrl, type, updateCursor, isLoa
         const scrollPosition = Math.ceil(target.scrollTop);
         const totalHeight = target.scrollHeight
         if (height + scrollPosition >= totalHeight) {
-            const lastItem = data[data.length - 1] as Recipe;
+            const lastItem = data[data.length - 1] as RecipeSummaryData;
             updateCursor(lastItem.id);
         }
     }

@@ -1,8 +1,16 @@
+import type { MouseEventHandler } from "react";
 import "../../styles/recipe-toolbar.css";
 
 import QuantitySelector from "./QuantitySelector";
 
-export default function RecipeToolbar({ portions, isOwn, onPortionChange, onEditClick }) {
+type Props = {
+    portions: number, 
+    isOwn: boolean, 
+    onPortionChange: Function, 
+    onEditClick: MouseEventHandler<HTMLButtonElement>
+}
+
+export default function RecipeToolbar({ portions, isOwn, onPortionChange, onEditClick }: Props) {
     return (
         <div id="ingredients-toolbar">
             <QuantitySelector portions={portions} onPortionChange={onPortionChange} />

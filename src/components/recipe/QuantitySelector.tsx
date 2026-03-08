@@ -1,6 +1,11 @@
 import "../../styles/quantity-selector.css";
 
-export default function QuantitySelector({portions, onPortionChange}) {
+type Props = {
+    portions: number, 
+    onPortionChange: Function
+}
+
+export default function QuantitySelector({portions, onPortionChange}: Props) {
     const quantities = [2, 3, 4, 6, 8];
     
     return (

@@ -1,7 +1,24 @@
+import type { MouseEventHandler } from "react";
 import "../../styles/modal.css"
 
-export default function Modal({type, title, message, onCancel, submitText = "OK", onSubmit=f => f}) {
-    let footer = "";
+type Props = {
+    type: "alert" | "modal", 
+    title: string, 
+    message: string, 
+    onCancel: MouseEventHandler<HTMLButtonElement>, 
+    submitText?: string, 
+    onSubmit?: MouseEventHandler<HTMLButtonElement>
+}
+
+export default function Modal({ 
+    type, 
+    title, 
+    message, 
+    onCancel, 
+    submitText = "OK", 
+    onSubmit = (f: any) => f
+}: Props) {
+    let footer = <></>;
     if (type == "alert") {
         footer = (
             <div id="modal__footer">

@@ -1,6 +1,11 @@
 import "../../styles/popup.css";
 
-export default function Popup({message, setShow}) {
+type Props = {
+    message: string, 
+    setShow: Function
+}
+
+export default function Popup({ message, setShow }: Props) {
     setTimeout(() => {
         setShow(false);
     }, 4000);
