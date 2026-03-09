@@ -67,6 +67,7 @@ export default function useFormSubmiter(
     return {
         showErrorModal,
         showSubmitPopup,
+        setShowSubmitPopup,
         errors,
         setErrors,
         submitForm,

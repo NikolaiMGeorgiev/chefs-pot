@@ -1,8 +1,17 @@
 
 import "../../styles/selector.css";
 
-import { useState } from "react";
+import { useState, type UIEvent } from "react";
 import ArrowIcon from "../icons/ArrowIcon";
+import type { GenericMap } from "../../types/common";
+
+type SelectorProps = {
+    items: GenericMap, 
+    name: string,
+    value: string,
+    onChange: Function,
+    attributes: GenericMap
+}
 
 export default function Selector({ 
     items, 
@@ -15,7 +24,7 @@ export default function Selector({
         placeholder=null,
         ...rest
     }
-}) {
+}: SelectorProps) {
     const [isExpanded, setIsExpanded] = useState(false);
     const selectedOptionText = value ? items[value] : placeholder;
 
@@ -24,8 +33,8 @@ export default function Selector({
         className += " expanded";
     }
 
-    const hadnleClick = (e) => {
-        let target = e.target;
+    const hadnleClick = (e: UIEvent<HTMLDivElement>) => {
+        let target = e.currentTarget;
         
         if (target.classList.value.split(" ").includes("selector__option")) {
             onChange(target.dataset.value);
@@ -38,7 +47,7 @@ export default function Selector({
         }
     }
 
-    const clickShouldTriggerExapnd = (target) => {
+    const clickShouldTriggerExapnd = (target: HTMLElement) => {
         let shouldTriggerExpand = false;
 
         while(target && !target.classList.value.includes("selector__wrapper")) {
@@ -46,7 +55,7 @@ export default function Selector({
                 shouldTriggerExpand = true;
                 break;
             }
-            target = target.parentNode
+            target = target.parentNode as HTMLElement
         }
 
         return shouldTriggerExpand;
@@ -72,7 +81,13 @@ export default function Selector({
     )
 }
 
-function SelectorOption({value, text, selectedValue}) {
+type OptionProps = {
+    value: any, 
+    text: string, 
+    selectedValue: any
+}
+
+function SelectorOption({ value, text, selectedValue }: OptionProps) {
     const className = "selector__option " + (value == selectedValue ? "selected" : "");
 
     return (

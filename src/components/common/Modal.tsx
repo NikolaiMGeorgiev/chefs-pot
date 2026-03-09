@@ -2,7 +2,7 @@ import type { MouseEventHandler } from "react";
 import "../../styles/modal.css"
 
 type Props = {
-    type: "alert" | "modal", 
+    type: string, 
     title: string, 
     message: string, 
     onCancel: MouseEventHandler<HTMLButtonElement>, 

@@ -3,7 +3,7 @@ import {
     newRecipeErrorTexts, 
     profileErrorTexts, 
     registerErrorTexts 
-} from "../data/error-texts.js";
+} from "../data/error-texts";
 import { 
     ERROR_TYPES, 
     loginValidationData, 
@@ -76,21 +76,7 @@ export function validateNewRecipeForm(data: NewRecipeData) {
         return true;
     }
 
-    const errors = getErrorTexts(validationResult, newRecipeErrorTexts);
-
-    for (let field of ["ingredients", "spices"]) {
-        const typeField = field as "ingredients" | "spices";
-        errors[field] = [];
-        for (let i in data[typeField]) {
-            const singleError = 
-                [`${field}-name`, `${field}-quantity`, `${field}-unit`]
-                    .map(singleField => errors[singleField] && (errors[singleField] as (string | true)[])[i])
-                    .filter(field => field && field !== true); 
-            (errors[field] as any[]).push(singleError && singleError.length ? singleError[0] : true);
-        }
-    }
-
-    return errors;
+    return getRecipeFormErrorTexts(data, validationResult, newRecipeErrorTexts);
 }
 
 export function validateModifiedRecipeForm(data: RecipeModifyData) {
@@ -110,21 +96,7 @@ export function validateModifiedRecipeForm(data: RecipeModifyData) {
         return true;
     }
 
-    const errors = getErrorTexts(validationResult, modifiedRecipeErrorTexts);
-
-    for (let field of ["ingredients", "spices"]) {
-        errors[field] = [];
-        for (let i in data[field]) {
-            const singleError = [
-                errors[`${field}-name`] && errors[`${field}-name`][i], 
-                errors[`${field}-quantity`] && errors[`${field}-quantity`][i], 
-                errors[`${field}-unit`] && errors[`${field}-unit`][i]
-            ].filter(field => field && field !== true);
-            errors[field].push(singleError && singleError.length ? singleError[0] : true);
-        }
-    }
-    
-    return errors;
+    return getRecipeFormErrorTexts(data, validationResult, modifiedRecipeErrorTexts)
 }
 
 export function validateRegisterForm(data: RegistrationData) {
@@ -267,4 +239,22 @@ function isEmptyString(str: string) {
     return !str || 
         !str.toString() || 
         !str.toString().replace(/\s+/g, "").length;
+}
+
+function getRecipeFormErrorTexts(data: GenericMap, validationResult: GenericMap, errorText: GenericMap) {
+    const errors = getErrorTexts(validationResult, errorText);
+
+    for (let field of ["ingredients", "spices"]) {
+        errors[field] = [];
+        const fieldNames = [`${field}-name`, `${field}-quantity`, `${field}-unit`]
+        for (let i in (data[field] as string[])) {
+            const singleError = 
+                fieldNames
+                    .map(singleField => errors[singleField] && (errors[singleField] as (string | true)[])[i])
+                    .filter(field => field && field !== true); 
+            (errors[field] as any[]).push(singleError && singleError.length ? singleError[0] : true);
+        }
+    }
+
+    return errors;
 }

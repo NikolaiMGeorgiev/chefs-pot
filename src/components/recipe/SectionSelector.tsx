@@ -1,7 +1,8 @@
 import "../../styles/section-selector.css";
+import type { SectionType } from "../../types/recipe";
 
 type Props = {
-    section: "ingredients" | "steps", 
+    section: SectionType, 
     setSection: Function
 }
 

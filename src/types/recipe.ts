@@ -16,16 +16,16 @@ type RecipeModifiedData = {
     portions: number
 }
 
-type ModifyStepData = {
-    id: number,
-    text: string
-}
-
 type RecipeData = RecipeSummaryData & {
     "creator_id": number,
     user: string,
     isOwn: boolean,
     isModifiable: boolean
+}
+
+export type ModifyStepData = {
+    id: string,
+    text: string
 }
 
 export type Ingredient = {
@@ -76,3 +76,7 @@ export type NewRecipeData = {
 }
 
 export type RecipeType = "original" | "my";
+
+export type IngredientType = "ingredients" | "spices";
+
+export type SectionType = "ingredients" | "steps";

@@ -1,12 +1,14 @@
 import { useSearchParams } from "react-router-dom";
 import { v4 as uuid } from "uuid";
+import type { GenericMap } from "../types/common";
+import type { RecipeModifyData, RecipeOriginalData, RecipeType } from "../types/recipe";
 
-export function handlRecipeRowAdd(data, type, row) {
+export function handlRecipeRowAdd(data: GenericMap, type: string, row: number) {
     const newData = [];
 
     for (let i in data) {
         newData.push(type == "steps" ? data[i] : { ...data[i] });
-        if (i == row) {
+        if (Number(i) == row) {
             newData.push(type == "steps" ?
                 { text: "", id: uuid() } : 
                 { name: "", quantity: "", unit: "" }
@@ -17,15 +19,15 @@ export function handlRecipeRowAdd(data, type, row) {
     return newData;
 }
 
-export function handlRecipeRowRemove(data, row) {
-    return data.filter((_, i) => i != row);
+export function handlRecipeRowRemove(data: GenericMap, row: number) {
+    return data.filter((_: object, i: number) => i != row);
 }
 
-export function handleRowValueChange(data, type, row, name, value) {
+export function handleRowValueChange(data: GenericMap, type: string, row: number, name: string, value: any) {
     const newData = [];
 
     for (let i in data) {
-        if (i == row) {
+        if (Number(i) == row) {
             newData.push(type == "steps" ? 
                 { ...data[i], text: value } : 
                 { ...data[i], [name]: value })
@@ -37,15 +39,15 @@ export function handleRowValueChange(data, type, row, name, value) {
     return newData;
 }
 
-export function getItemEventHandlers(data, itemType, onValueChange) {
+export function getItemEventHandlers(data: GenericMap, itemType: string, onValueChange: Function) {
     return {
-        onItemAdd: (row) => {
+        onItemAdd: (row: number) => {
             onValueChange(itemType, handlRecipeRowAdd(data, itemType, row));
         },
-        onItemRemove: (row) => {
+        onItemRemove: (row: number) => {
             onValueChange(itemType, handlRecipeRowRemove(data, row), row)
         },
-        onValueChange: (row, name, value) => {
+        onValueChange: (row: number, name: string, value: any) => {
             onValueChange(
                 itemType, 
                 handleRowValueChange(data, itemType, row, name, value), 
@@ -55,7 +57,7 @@ export function getItemEventHandlers(data, itemType, onValueChange) {
     }
 }
 
-export function getInitialRecipeVersion(initialModifiedData) {
+export function getInitialRecipeVersion(initialModifiedData: RecipeOriginalData | undefined): RecipeType {
     const [searchParams] = useSearchParams();
     return searchParams.get("section") &&
         searchParams.get("section") == "my" &&
