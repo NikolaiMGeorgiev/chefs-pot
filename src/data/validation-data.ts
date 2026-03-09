@@ -105,10 +105,19 @@ export const profileValidationData = {
 };
 
 export function getComponentFormData(formId: string) {
-    return formId in formData ? formData[formId] : {};
+    return formData[formId] ? formData[formId] : {
+        validationFn: (f: any) => f,
+        sendData: (f: any) => f
+    };
 }
 
-const formData = {
+const formData: { 
+    [key: string]: {
+        validationFn: Function,
+        sendData: Function, 
+        submitSuccessMessage?: string
+    }
+} = {
     "recipe-form": {
         validationFn: validateModifiedRecipeForm,
         sendData: updateRecipe,

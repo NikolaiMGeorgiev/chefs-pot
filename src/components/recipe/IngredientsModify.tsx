@@ -3,18 +3,28 @@ import "../../styles/recipe-form-row.css";
 import { getItemEventHandlers } from "../../helpers/recipe";
 import IngredientInputs from "./IngredientInputs";
 import InputError from "./InputError";
+import type { GenericMap } from "../../types/common";
+import type { RefObject } from "react";
+import type { Ingredient, IngredientType } from "../../types/recipe";
 
-export default function IngredientsModify({ data, errors, errorInputRef, onValueChange }) {
+type Props = {
+    data: GenericMap, 
+    errors: GenericMap, 
+    errorInputRef: RefObject<HTMLElement | null>, 
+    onValueChange: Function
+} 
+
+export default function IngredientsModify({ data, errors, errorInputRef, onValueChange }: Props) {
     const ingredientsList = data.ingredients
-        .map((ingredient, row) =>
+        .map((ingredient: Ingredient, row: number) =>
             getListItem(row, ingredient, "ingredients")
         );
     const spicesList = data.spices
-        .map((spice, row) => 
+        .map((spice: Ingredient, row: number) => 
             getListItem(row, spice, "spices")
         );
 
-    function getListItem(row, ingredient, itemType) {
+    function getListItem(row: number, ingredient: Ingredient, itemType: IngredientType) {
         return (
             <div className="input-control">
                 <IngredientInputs

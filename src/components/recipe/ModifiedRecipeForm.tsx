@@ -1,10 +1,19 @@
+import type { RefObject } from "react";
 import "../../styles/modified-recipe-form.css";
+import type { GenericMap } from "../../types/common";
 
 import IngredientsModify from "./IngredientsModify";
 import RecipeToolbarEdit from "./RecipeToolbarEdit";
 import StepsModify from "./StepsModify";
 
-export default function ModifiedRecipeForm({ data, errors, errorInputRef, onValueChange }) {
+type Props = {
+    data: GenericMap, 
+    errors: GenericMap, 
+    errorInputRef: RefObject<HTMLElement | null>, 
+    onValueChange: Function
+}
+
+export default function ModifiedRecipeForm({ data, errors, errorInputRef, onValueChange }: Props) {
     const { portions, onCancelEdit, section } = data;
     
     return (

@@ -1,6 +1,16 @@
 import ExIcon from "../icons/ExIcon"
 import PlusIcon from "../icons/PlusIcon"
 
+type Props = {
+    id: string,
+    text: string, 
+    row: number, 
+    isOnlyRow: boolean,
+    onItemAdd: Function, 
+    onItemRemove: Function, 
+    onValueChange: Function
+}
+
 export default function StepInputs({ 
     id,
     text, 
@@ -9,7 +19,7 @@ export default function StepInputs({
     onItemAdd, 
     onItemRemove, 
     onValueChange 
-}) {
+}: Props) {
     return (
         <li key={id}>
             <div className="step-wrapper">

@@ -1,19 +1,32 @@
-import Selector from "../common/Selector.js"
-import units from "../../units.js"
+import Selector from "../common/Selector"
+import units from "../../units"
 import PlusIcon from "../icons/PlusIcon.js"
 import ExIcon from "../icons/ExIcon.js"
+import type { IngredientType, Unit } from "../../types/recipe.js"
+
+type Props = {
+    name: string, 
+    quantity: number, 
+    unit: Unit, 
+    type: IngredientType,
+    row: number, 
+    isOnlyRow: boolean,
+    onItemAdd: Function, 
+    onItemRemove: Function,
+    onValueChange: Function
+}
 
 export default function IngredientInputs({ 
-    name = "", 
-    quantity = 0, 
-    unit = "", 
+    name, 
+    quantity, 
+    unit, 
     type,
     row, 
     isOnlyRow,
     onItemAdd, 
     onItemRemove,
     onValueChange
-}) {
+}: Props) {
     const unitSelectorAttrs = {
         placeholder: "Select unit"
     }
@@ -51,7 +64,7 @@ export default function IngredientInputs({
                     attributes={unitSelectorAttrs} 
                     name={`${type}-unit`} 
                     value={unit} 
-                    onChange={value => onValueChange(row, "unit", value)}
+                    onChange={(value: Unit) => onValueChange(row, "unit", value)}
                 />
             </label>
             <button className="add-row-btn" type="button" onClick={() => onItemAdd(row)}>

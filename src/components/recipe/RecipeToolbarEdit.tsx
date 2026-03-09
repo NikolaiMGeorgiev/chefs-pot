@@ -1,6 +1,13 @@
+import type { MouseEventHandler } from "react";
 import "../../styles/recipe-toolbar.css";
 
-export default function RecipeToolbarEdit({ portions, onCancelEdit, onValueChange }) {
+type Props = {
+    portions: number, 
+    onCancelEdit: MouseEventHandler<HTMLButtonElement>, 
+    onValueChange: Function
+}
+
+export default function RecipeToolbarEdit({ portions, onCancelEdit, onValueChange }: Props) {
     return (
         <div id="ingredients-toolbar">
             <div>

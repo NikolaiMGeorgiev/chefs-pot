@@ -1,8 +1,32 @@
-import { useEffect, useRef, useState } from "react";
+import { 
+    useEffect, 
+    useRef, 
+    useState, 
+    type ComponentType, 
+    type RefObject, 
+    type SubmitEvent 
+} from "react";
 import Modal from "./Modal";
 import Popup from "./Popup";
 import useFormSubmiter from "../../hooks/useFormSubmiter";
 import { getComponentFormData } from "../../data/validation-data";
+import type { GenericMap } from "../../types/common";
+
+type ComponentProps = {
+    data: GenericMap,
+    errors: GenericMap,
+    errorInputRef: RefObject<HTMLElement | null>,
+    onValueChange: Function
+}
+
+type Props = {
+    formId: string,
+    initialData: object, 
+    handleResponse: Function,
+    Component: ComponentType<ComponentProps>,
+    className?: string,
+    externalData?: GenericMap
+}
 
 export default function ValidatedForm({
     formId,
@@ -10,8 +34,8 @@ export default function ValidatedForm({
     handleResponse,
     Component,
     className = "",
-    externalData = null
-}) {
+    externalData = {}
+}: Props) {
     const [data, setData] = useState({...initialData});
     const {
         validationFn,
@@ -26,20 +50,20 @@ export default function ValidatedForm({
         showSubmitPopup,
         setShowSubmitPopup,
         errorModalData
-     } = useFormSubmiter(data, sendData, handleResponse, submitSuccessMessage);
-    const errorInputRef = useRef(null);
+     } = useFormSubmiter(data, sendData, handleResponse, submitSuccessMessage ? true : false);
+    const errorInputRef = useRef<HTMLElement>(null);
 
     mergeExternalData(data, externalData, setData);
 
     useEffect(() => {
         if (errorInputRef.current) {
-            errorInputRef.current.parentNode.scrollIntoView({
+            (errorInputRef.current.parentNode as HTMLElement).scrollIntoView({
                 behavior: "smooth"
             });
         }
     }, [errors])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: SubmitEvent) => {
         e.preventDefault();
         const validationResult = validationFn(data);
         if (validationResult !== true) {
@@ -49,7 +73,7 @@ export default function ValidatedForm({
         submitForm();
     }
 
-    const handleValueChange = (name, value, row = null) => {
+    const handleValueChange = (name: string, value: any, row: number | undefined = undefined) => {
         setData({
             ...data,
             [name]: value
@@ -57,9 +81,11 @@ export default function ValidatedForm({
         clearError(name, row);
     }
 
-    const clearError = (inputName, row) => {
-        const newErrors = { ...errors };
-        if (newErrors[inputName] instanceof Array) {
+    const clearError = (inputName: string, row?: number) => {
+        const newErrors: { 
+            [key:string]: (string | true) | (string | true)[] 
+        } = { ...errors };
+        if (newErrors[inputName] instanceof Array && row !== undefined) {
             newErrors[inputName][row] = true;
         } else {
             newErrors[inputName] = true;
@@ -73,13 +99,13 @@ export default function ValidatedForm({
                 <Component data={data} errors={errors} errorInputRef={errorInputRef} onValueChange={handleValueChange} />
             </form>
             { showErrorModal && <Modal {...errorModalData} /> }
-            { showSubmitPopup && <Popup message={submitSuccessMessage} setShow={setShowSubmitPopup} /> }
+            { showSubmitPopup && <Popup message={submitSuccessMessage as string} setShow={setShowSubmitPopup} /> }
         </>
     )
 }
 
-function mergeExternalData(data, externalData, setData) {
-    if (!externalData) {
+function mergeExternalData(data: GenericMap, externalData: GenericMap, setData: Function) {
+    if (!Object.keys(externalData).length) {
         return;
     }
 

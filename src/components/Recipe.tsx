@@ -4,22 +4,28 @@ import { useNavigate, useParams } from "react-router-dom";
 import Ingredients from "./recipe/Ingredients";
 import Steps from "./recipe/Steps";
 import { useState } from "react";
-import { normalizeIngredients } from "../helpers/data.js";
+import { normalizeIngredients } from "../helpers/data";
 import RecipeVersion from "./recipe/RecipeVersion";
 import SectionSelector from "./recipe/SectionSelector";
 import RecipeAvatar from "./recipe/RecipeAvatar";
 import RecipeToolbar from "./recipe/RecipeToolbar";
 import { DataLoader } from "./common/DataLoader";
 import { HOST, HSOT_PORT } from "../../config.js";
-import ValidatedForm from "./common/ValidatedForm.js";
+import ValidatedForm from "./common/ValidatedForm";
 import Popup from "./common/Popup.js";
-import FavouriteButton from "./common/FavouriteButton.js";
-import useRecipePortions from "../hooks/useRecipePortions.js";
-import { getInitialRecipeVersion } from "../helpers/recipe.js";
-import ModifiedRecipeForm from "./recipe/ModifiedRecipeForm.js";
+import FavouriteButton from "./common/FavouriteButton";
+import useRecipePortions from "../hooks/useRecipePortions";
+import { getInitialRecipeVersion } from "../helpers/recipe";
+import ModifiedRecipeForm from "./recipe/ModifiedRecipeForm";
 import { v4 as uuid } from "uuid";
 import Modal from "./common/Modal.js";
-import type { RecipeModifyData, RecipeResponseData } from "../types/recipe";
+import { 
+    type SectionType, 
+    type RecipeModifyData, 
+    type RecipeOriginalData, 
+    type RecipeResponseData, 
+    type RecipeType 
+} from "../types/recipe";
 
 export default function RecipeLoader() {
     const { id } = useParams();
@@ -58,8 +64,8 @@ export function Recipe({ initialData, id }: Props) {
         portions
     } = initialData.recipeData;
 
-    const [section, setSection] = useState("ingredients");
-    const [version, setVersion] = useState<RecipeVersion>(getInitialRecipeVersion(initialModifiedData));
+    const [section, setSection] = useState<SectionType>("ingredients");
+    const [version, setVersion] = useState<RecipeType>(getInitialRecipeVersion(initialModifiedData as RecipeOriginalData));
     const [edit, setEdit] = useState(false);
     const isModifiedRecipe = version == "original" || !initialModifiedData;
     const [data, setData] = useState(
@@ -100,7 +106,7 @@ export function Recipe({ initialData, id }: Props) {
         setEdit(false);
     };
 
-    const handleVersionChange = (newVersion: RecipeVersion) => {
+    const handleVersionChange = (newVersion: RecipeType) => {
         if (newVersion == version) {
             return;
         }
