@@ -1,8 +1,8 @@
 import Selector from "../common/Selector"
 import units from "../../units"
-import PlusIcon from "../icons/PlusIcon.js"
-import ExIcon from "../icons/ExIcon.js"
-import type { IngredientType, Unit } from "../../types/recipe.js"
+import PlusIcon from "../icons/PlusIcon"
+import ExIcon from "../icons/ExIcon"
+import type { IngredientType, Unit } from "../../types/recipe"
 
 type Props = {
     name: string, 

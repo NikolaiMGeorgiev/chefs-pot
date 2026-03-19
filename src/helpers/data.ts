@@ -1,7 +1,7 @@
-import { HOST, HSOT_PORT } from "../../config.js";
-import type { FavouriteButtonAction } from "../types/common.js";
-import type { LoginData, ProfileData, RegistrationData } from "../types/data.js";
-import type { Ingredient, RecipeModifyData } from "../types/recipe.js";
+import { HOST, HSOT_PORT } from "../../config";
+import type { FavouriteButtonAction } from "../types/common";
+import type { LoginData, ProfileData, RegistrationData } from "../types/data";
+import type { Ingredient, RecipeModifyData } from "../types/recipe";
 
 export function updateRecipe(data: RecipeModifyData) {
     const formData = data.isOwn ?

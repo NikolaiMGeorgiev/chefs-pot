@@ -4,13 +4,13 @@ import {
     sendProfileUpdate, 
     sendRegistration, 
     updateRecipe 
-} from "../helpers/data.js";
+} from "../helpers/data";
 import { validateLoginForm, 
     validateModifiedRecipeForm, 
     validateNewRecipeForm, 
     validateProfileForm, 
     validateRegisterForm 
-} from "../helpers/validation.js";
+} from "../helpers/validation";
 
 
 export const ERROR_TYPES = {

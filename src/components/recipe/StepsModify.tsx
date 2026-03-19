@@ -1,18 +1,10 @@
-import type { RefObject } from "react";
 import { getItemEventHandlers } from "../../helpers/recipe";
-import type { GenericMap } from "../../types/common";
 import InputError from "./InputError";
 import StepInputs from "./StepInputs";
 import type { ModifyStepData } from "../../types/recipe";
+import type { ValidatedFormProps } from "../../types/data";
 
-type Props = {
-    data: GenericMap, 
-    errors: GenericMap, 
-    onValueChange: Function, 
-    errorInputRef: RefObject<HTMLElement | null>
-}
-
-export default function StepsModify({ data, errors, onValueChange, errorInputRef }: Props) {
+export default function StepsModify({ data, errors, onValueChange, errorInputRef }: ValidatedFormProps) {
     const eventHandlers = getItemEventHandlers(data, "steps", onValueChange);
     return (
         <div>

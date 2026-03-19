@@ -11,10 +11,10 @@ import {
     newRecipeValidationData, 
     profileValidationData, 
     registerValidationData 
-} from "../data/validation-data.js";
-import type { GenericMap } from "../types/common.js";
-import type { LoginData, ProfileData, RegistrationData } from "../types/data.js";
-import type { NewRecipeData, RecipeModifyData } from "../types/recipe.js";
+} from "../data/validation-data";
+import type { GenericMap } from "../types/common";
+import type { LoginData, ProfileData, RegistrationData } from "../types/data";
+import type { NewRecipeData, RecipeModifyData } from "../types/recipe";
 
 type InputTypes = "list" | "text" | "number" | "file" | "password" | "email";
 
