@@ -10,15 +10,15 @@ import SectionSelector from "./recipe/SectionSelector";
 import RecipeAvatar from "./recipe/RecipeAvatar";
 import RecipeToolbar from "./recipe/RecipeToolbar";
 import { DataLoader } from "./common/DataLoader";
-import { HOST, HSOT_PORT } from "../../config.js";
+import { HOST, HSOT_PORT } from "../../config";
 import ValidatedForm from "./common/ValidatedForm";
-import Popup from "./common/Popup.js";
+import Popup from "./common/Popup";
 import FavouriteButton from "./common/FavouriteButton";
 import useRecipePortions from "../hooks/useRecipePortions";
 import { getInitialRecipeVersion } from "../helpers/recipe";
 import ModifiedRecipeForm from "./recipe/ModifiedRecipeForm";
 import { v4 as uuid } from "uuid";
-import Modal from "./common/Modal.js";
+import Modal from "./common/Modal";
 import { 
     type SectionType, 
     type RecipeModifyData, 
@@ -140,7 +140,6 @@ export function Recipe({ initialData, id }: Props) {
                 handleResponse={handleModifiedRecipeResponse}
                 formId="recipe-form"
                 className="scrollable__container"
-
             />
         )
     }

@@ -34,7 +34,7 @@ export default function Selector({
     }
 
     const hadnleClick = (e: UIEvent<HTMLDivElement>) => {
-        let target = e.currentTarget;
+        const target = e.currentTarget;
         
         if (target.classList.value.split(" ").includes("selector__option")) {
             onChange(target.dataset.value);

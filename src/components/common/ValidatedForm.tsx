@@ -3,7 +3,6 @@ import {
     useRef, 
     useState, 
     type ComponentType, 
-    type RefObject, 
     type SubmitEvent 
 } from "react";
 import Modal from "./Modal";
@@ -11,19 +10,14 @@ import Popup from "./Popup";
 import useFormSubmiter from "../../hooks/useFormSubmiter";
 import { getComponentFormData } from "../../data/validation-data";
 import type { GenericMap } from "../../types/common";
+import type { ValidatedFormProps } from "../../types/data";
 
-type ComponentProps = {
-    data: GenericMap,
-    errors: GenericMap,
-    errorInputRef: RefObject<HTMLElement | null>,
-    onValueChange: Function
-}
 
 type Props = {
     formId: string,
     initialData: object, 
     handleResponse: Function,
-    Component: ComponentType<ComponentProps>,
+    Component: ComponentType<ValidatedFormProps>,
     className?: string,
     externalData?: GenericMap
 }

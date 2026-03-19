@@ -2,7 +2,7 @@ import type { RefObject } from "react"
 
 type Props = {
     text: string, 
-    errorInputRef: RefObject<HTMLElement | null>, 
+    errorInputRef?: RefObject<HTMLElement | null> | undefined, 
     id?: string
 }
 
