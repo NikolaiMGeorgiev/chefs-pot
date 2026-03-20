@@ -2,7 +2,7 @@ import "../styles/recipes.css";
 
 import { useState } from "react";
 import RecipesList from "./recipes/RecipesList";
-import { HOST, HSOT_PORT } from "../../config";
+import { HOST, HSOT_PORT } from "../config";
 import useDataFetch from "../hooks/useDataFetch";
 
 

@@ -4,7 +4,7 @@ import "../styles/profile.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { DataLoader } from "./common/DataLoader";
-import { HOST, HSOT_PORT } from "../../config";
+import { HOST, HSOT_PORT } from "../config";
 import ValidatedForm from "./common/ValidatedForm";
 import InputWithLabel from "./common/InputWithLabel";
 import type { ValidatedFormProps } from "../types/data";

@@ -10,7 +10,7 @@ import SectionSelector from "./recipe/SectionSelector";
 import RecipeAvatar from "./recipe/RecipeAvatar";
 import RecipeToolbar from "./recipe/RecipeToolbar";
 import { DataLoader } from "./common/DataLoader";
-import { HOST, HSOT_PORT } from "../../config";
+import { HOST, HSOT_PORT } from "../config";
 import ValidatedForm from "./common/ValidatedForm";
 import Popup from "./common/Popup";
 import FavouriteButton from "./common/FavouriteButton";

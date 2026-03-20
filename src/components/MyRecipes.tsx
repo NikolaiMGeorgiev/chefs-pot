@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import RecipesList from "./recipes/RecipesList";
 import RecipeTypeSelector, { recipeTypes } from "./recipes/RecipeTypeSelector";
 import useDataFetch from "../hooks/useDataFetch";
-import { HOST, HSOT_PORT } from "../../config";
+import { HOST, HSOT_PORT } from "../config";
 
 export default function MyRecipes() {
     const navigator = useNavigate();

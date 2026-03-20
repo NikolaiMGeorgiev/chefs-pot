@@ -3,7 +3,7 @@ import multer from "multer";
 import cookieParser from "cookie-parser";
 import jwt, {} from "jsonwebtoken";
 import "dotenv/config";
-import { addModifiedRecipe, addRecipe, getModifiedRecipeById, getRecipeById, getRecipesByIngredients, getRecipesSummary, getUserRecipesByIngredients, getUserRecipesSummary, updateRecipe } from "./models/recipes";
+import { addModifiedRecipe, addRecipe, getModifiedRecipeById, getRecipeById, getRecipesByIngredients, getRecipesSummary, getUserRecipesByIngredients, getUserRecipesSummary, updateRecipe } from "./models/recipes.js";
 import { addUser, getUserById, getUserByUsernameAndPassword, updateUserById } from "./models/users";
 import { HSOT_PORT } from "../config";
 import { validateData } from "../src/helpers/validation";

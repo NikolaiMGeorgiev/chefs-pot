@@ -4,7 +4,7 @@ import "../../styles/recipes-search.css";
 import { useReducer } from "react";
 import FilterIcon from "../icons/FilterIcon";
 import ExIcon from "../icons/ExIcon";
-import { HOST, HSOT_PORT } from "../../../config";
+import { HOST, HSOT_PORT } from "../../config";
 import useFilteredIngredientsSearch from "../../hooks/useFilteredIngredientsSearch";
 import recipeFilterReducer from "../../reducers/recipeFilterReducer";
 import IngredientsSearchBox from "./IngredientsSearchBox";

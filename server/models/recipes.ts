@@ -1,8 +1,8 @@
 import { type RowDataPacket, type ResultSetHeader } from "mysql2";
 import { RECIPES_PER_PAGE } from "../../config";
-import { db } from "../db.js";
-import * as helper from "../helpers/recipes.js";
-import type { RecipeData, SelectedRecipeTypes } from "../types/recipes.js";
+import { db } from "../db";
+import * as helper from "../helpers/recipes";
+import type { RecipeData, SelectedRecipeTypes } from "../types/recipes";
 
 export async function getRecipesSummary(userId: number, cursor?: number) {
     const params = userId !== undefined ? [userId] : [];

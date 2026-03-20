@@ -14,7 +14,7 @@ import {
     getUserRecipesByIngredients, 
     getUserRecipesSummary, 
     updateRecipe 
-} from "./models/recipes";
+} from "./models/recipes.js";
 import { addUser, getUserById, getUserByUsernameAndPassword, updateUserById } from "./models/users";
 import { HSOT_PORT } from "../config";
 import { validateData } from "../src/helpers/validation";

@@ -2,8 +2,8 @@
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
-    "rootDir": "./server",
-    "outDir": "./dist/server",
+    "rootDir": "./src",
+    "outDir": "./dist/src",
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
@@ -43,5 +43,5 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["server"]
+  "include": ["src"]
 }
