@@ -1,6 +1,6 @@
 import type { RowDataPacket } from "mysql2";
-import { RECIPES_PER_PAGE } from "../../config.js";
-import type { SelectedRecipeTypes } from "../types/recipes.js";
+import { RECIPES_PER_PAGE } from "../../config";
+import type { SelectedRecipeTypes } from "../types/recipes";
 
 export function getRecipesSummaryQuery(userId: number, cursor?: number,  additionalWhereClause = "") {
     const whereParams = [];

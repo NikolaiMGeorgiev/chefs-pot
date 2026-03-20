@@ -1,5 +1,5 @@
-import { type RowDataPacket } from "mysql2";
-import { db } from "../db";
+import { type ResultSetHeader, type RowDataPacket } from "mysql2";
+import { db } from "../db.js";
 
 export async function getUserById(id: number) {
     const [results] = await db.execute<RowDataPacket[]>(
@@ -32,7 +32,7 @@ export async function addUser(
     email: string, 
     password: string
 ) {
-    const results = await db.execute(
+    const results = await db.execute<ResultSetHeader>(
         `INSERT INTO users (username, email, first_name, last_name, password)
         VALUES (?, ?, ?, ?, ?)`,
         [username, email, firstName, lastName, password]

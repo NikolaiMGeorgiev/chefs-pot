@@ -1,10 +1,14 @@
-const path = require('path');
-const TerserPlugin = require("terser-webpack-plugin");
+import { resolve, dirname  } from 'path';
+import TerserPlugin from "terser-webpack-plugin";
+import { fileURLToPath } from 'url';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export default {
   entry: './src/index.tsx',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
   devtool: "source-map",

@@ -1,7 +1,8 @@
 import express, { type Request, type Response } from "express";
 import multer from "multer";
 import cookieParser from "cookie-parser";
-import jwt from "jsonwebtoken";
+import jwt, { type JwtPayload, type Secret, type VerifyErrors } from "jsonwebtoken";
+import type { CookieOptions } from "react-router-dom";
 import "dotenv/config";
 import { 
     addModifiedRecipe, 
@@ -15,12 +16,12 @@ import {
     updateRecipe 
 } from "./models/recipes";
 import { addUser, getUserById, getUserByUsernameAndPassword, updateUserById } from "./models/users";
-import { HSOT_PORT } from "../config.js";
-import { validateData } from "../src/helpers/validation.js";
-import { newRecipeValidationData } from "../src/data/validation-data.js";
+import { HSOT_PORT } from "../config";
+import { validateData } from "../src/helpers/validation";
+import { newRecipeValidationData } from "../src/data/validation-data";
 import { getIngredients } from "./models/ingredients";
 import { addFavourite, getIsFavourite, removeFavourite } from "./models/favourites";
-import type { SelectedRecipeTypes } from "./types/recipes";
+import type { Ingredient, SelectedRecipeTypes } from "./types/recipes";
 
 const app = express();
 const fileStorage = multer.diskStorage({
@@ -33,7 +34,7 @@ const fileStorage = multer.diskStorage({
     }
 });
 const fileUploader = multer({storage: fileStorage});
-const cookieSettings = {
+const cookieSettings: CookieOptions = {
     httpOnly: true,
     secure: true,
     sameSite: 'strict',
@@ -173,8 +174,8 @@ app.post('/api/recipes/:recipeId', autheticateToken, async (req, res) => {
             portions
 
         } = req.body;
-        const user = req.user;
-        await addModifiedRecipe(originalRecipeId, user.id, ingredients, spices, steps, portions);
+        const userId = req.user?.id;
+        await addModifiedRecipe(Number(originalRecipeId), Number(userId), ingredients, spices, steps, portions);
         res.send();
     } catch (error) {
         console.log(error);
@@ -192,12 +193,17 @@ app.post('/api/update-recipe/:recipeId', autheticateToken, async (req, res) => {
             title,
         } = req.body;
         const recipeId = req.params.recipeId;
-        const user = req.user;
-        const recipeData = await getRecipeById(recipeId);
-        if (recipeData["creator_id"] != user.id) {
+        const userId = req.user?.id;
+        const recipeData = await getRecipeById(Number(recipeId));
+
+        if (!recipeData) {
+            throw new Error("Invalid resipe request")
+        }
+
+        if (recipeData["creator_id"] != userId) {
             return res.status(401).send();
         }
-        await updateRecipe(recipeId, title, ingredients, spices, steps, portions);
+        await updateRecipe(Number(recipeId), title, ingredients, spices, steps, portions);
         res.send();
     } catch (error) {
         console.log(error);
@@ -211,12 +217,12 @@ app.post('/recipe', fileUploader.single("image"), autheticateToken, async (req, 
         const image = req.file ? req.file.fieldname : '';
 
         const validationResult = validateData({
-            "ingredients-name": JSON.parse(ingredients).map(ingredient => ingredient.name),
-            "ingredients-quantity": JSON.parse(ingredients).map(ingredient => ingredient.quantity),
-            "ingredients-unit": JSON.parse(ingredients).map(ingredient => ingredient.unit),
-            "spices-name": JSON.parse(spices).map(spice => spice.name),
-            "spices-quantity": JSON.parse(spices).map(spice => spice.quantity),
-            "spices-unit": JSON.parse(spices).map(spice => spice.unit),
+            "ingredients-name": JSON.parse(ingredients).map((ingredient: Ingredient) => ingredient.name),
+            "ingredients-quantity": JSON.parse(ingredients).map((ingredient: Ingredient) => ingredient.quantity),
+            "ingredients-unit": JSON.parse(ingredients).map((ingredient: Ingredient) => ingredient.unit),
+            "spices-name": JSON.parse(spices).map((spice: Ingredient) => spice.name),
+            "spices-quantity": JSON.parse(spices).map((spice: Ingredient) => spice.quantity),
+            "spices-unit": JSON.parse(spices).map((spice: Ingredient) => spice.unit),
             steps: JSON.parse(steps),
             title,
             portions
@@ -226,11 +232,11 @@ app.post('/recipe', fileUploader.single("image"), autheticateToken, async (req, 
             res.status(400).send("Invalid data");
         }
 
-        const user = req.user;
+        const userId = req.user?.id;
 
         const newReicpeId = await addRecipe(
             title, 
-            user.id,
+            Number(userId),
             image, 
             ingredients, 
             spices, 
@@ -250,7 +256,7 @@ app.post("/register", async (req, res) => {
     try {
         const { username, firstName, lastName, email, password } = req.body;
         const userQueryResult = await addUser(username, firstName, lastName, email, password);
-        const token = jwt.sign({id: userQueryResult.insertId, username}, process.env.ACCESS_TOKEN_SECRET);
+        const token = jwt.sign({id: userQueryResult.insertId, username}, process.env.ACCESS_TOKEN_SECRET as Secret);
         res.cookie("authcookie", token, cookieSettings);
         res.send();
     } catch (error) {
@@ -266,7 +272,7 @@ app.post("/login", async (req, res) => {
         if (!userQueryResult) {
             res.status(401).send("Incorrect login data");
         } else {
-            const token = jwt.sign({ id: userQueryResult.id, username }, process.env.ACCESS_TOKEN_SECRET);
+            const token = jwt.sign({ id: userQueryResult.id, username }, process.env.ACCESS_TOKEN_SECRET as Secret);
             res.cookie("authcookie", token, cookieSettings);
             res.send();
         }
@@ -279,7 +285,8 @@ app.post("/login", async (req, res) => {
 app.post("/profile", autheticateToken, async (req, res) => {
     try {
         const { username, email } = req.body;
-        const userQueryResult = await updateUserById(req.user.id, username, email);
+        const userId = Number(req.user?.id);
+        const userQueryResult = await updateUserById(userId, username, email);
         res.send();
     } catch (error) {
         console.log(error);
@@ -290,10 +297,10 @@ app.post("/profile", autheticateToken, async (req, res) => {
 app.post("/api/favourite", autheticateToken, async (req, res) => {
     try {
         const { recipeId, action } = req.body;
-        const user = req.user;
+        const userID= Number(req.user?.id);
         const result = action == "add" ? 
-            await addFavourite(recipeId, user.id) : 
-            await removeFavourite(recipeId, user.id);
+            await addFavourite(recipeId, userID) : 
+            await removeFavourite(recipeId, userID);
         res.send();
     } catch (error) {
         console.log(error);
@@ -325,20 +332,32 @@ const noCookieEndpoints = [
 ]
 
 function autheticateToken(req: Request, res: Response, next: Function) {
-    const cookie = req.cookies["authcookie"];
+    const cookie: string = req.cookies["authcookie"];
     if (!cookie) {
-        if (noCookieEndpoints.filter(endpoint => endpoint.test(req.originalUrl)).length) {
-            req.user = null;
-        } else {
+        if (!noCookieEndpoints.filter(endpoint => endpoint.test(req.originalUrl)).length) {
             return res.status(401).send();
         }
     } else {
-        jwt.verify(cookie, process.env.ACCESS_TOKEN_SECRET, (err: Error, user: { id: number }) => {
-            if (err) {
-                return res.status(403).send();
+        jwt.verify(cookie, process.env.ACCESS_TOKEN_SECRET as string, undefined, (err: VerifyErrors | null, decoded: JwtPayload | string | undefined) => {
+            if (err || !isReqUser(decoded)) {
+                res.status(403).send();
+            } else {
+                req.user = decoded;
             }
-            req.user = user;
         });
     }
     next();
+}
+
+interface ReqUser {
+  id: number;
+}
+
+function isReqUser(payload: any): payload is ReqUser {
+  return (
+    payload &&
+    typeof payload === "object" &&
+    "id" in payload &&
+    typeof payload.id === "number"
+  );
 }

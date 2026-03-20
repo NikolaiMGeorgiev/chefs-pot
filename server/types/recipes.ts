@@ -23,3 +23,19 @@ export type ModifiedRecipeData = {
     steps: string,
     portions: number
 }
+
+export type Ingredient = {
+    name: string,
+    quantity: number,
+    unit: Unit
+}
+
+export enum Unit {
+    gr = "gr",
+    mg = "mg",
+    ml = "ml",
+    tbs = "tbs",
+    ts = "ts",
+    cups = "cups",
+    none = "none"
+}
