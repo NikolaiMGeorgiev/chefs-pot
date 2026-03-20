@@ -16,7 +16,7 @@ export default {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
+        include: resolve(__dirname, "src"),
         use: {
           loader: 'babel-loader',
           options: {
@@ -28,8 +28,13 @@ export default {
         use: ['style-loader', 'css-loader'],
       }, {
         test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/
+        include: resolve(__dirname, "src"),
+        use: {
+          loader: "ts-loader",
+          options: {
+            configFile: "tsconfig.client.json"
+          }
+        }
       }
     ]
   },

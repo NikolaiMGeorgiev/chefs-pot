@@ -1,5 +1,5 @@
 import { type RowDataPacket } from "mysql2";
-import type { RecipeData, SelectedRecipeTypes } from "../types/recipes.js";
+import type { RecipeData, SelectedRecipeTypes } from "../types/recipes";
 export declare function getRecipesSummary(userId: number, cursor?: number): Promise<RowDataPacket[]>;
 export declare function getRecipesByIngredients(ingredients: string | string[], cursor: number, userId: number): Promise<RowDataPacket[]>;
 export declare function getUserRecipesByIngredients(ingredients: string | string[], userId: number, cursor: number, selectedRecipeTypes: SelectedRecipeTypes): Promise<RowDataPacket[]>;
