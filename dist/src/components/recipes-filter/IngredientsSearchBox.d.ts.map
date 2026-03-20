@@ -1,0 +1,1 @@
+{"version":3,"file":"IngredientsSearchBox.d.ts","sourceRoot":"","sources":["../../../../src/components/recipes-filter/IngredientsSearchBox.tsx"],"names":[],"mappings":"AAEA,KAAK,KAAK,GAAG;IACT,WAAW,EAAE,MAAM,CAAC;IACpB,QAAQ,EAAE,QAAQ,CAAA;CACrB,CAAA;AAED,MAAM,CAAC,OAAO,UAAU,oBAAoB,CAAC,EAAE,WAAW,EAAE,QAAQ,EAAE,EAAE,KAAK,2CAoB5E"}

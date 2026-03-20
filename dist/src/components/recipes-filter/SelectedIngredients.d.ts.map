@@ -1,0 +1,1 @@
+{"version":3,"file":"SelectedIngredients.d.ts","sourceRoot":"","sources":["../../../../src/components/recipes-filter/SelectedIngredients.tsx"],"names":[],"mappings":"AAGA,KAAK,KAAK,GAAG;IACT,mBAAmB,EAAE,MAAM,EAAE,CAAC;IAC9B,QAAQ,EAAE,QAAQ,CAAA;CACrB,CAAA;AAED,MAAM,CAAC,OAAO,UAAU,mBAAmB,CAAC,EAAE,mBAAmB,EAAE,QAAQ,EAAE,EAAE,KAAK,2CAsBnF"}

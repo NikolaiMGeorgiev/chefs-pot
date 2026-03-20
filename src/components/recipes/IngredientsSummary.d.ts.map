@@ -1,1 +1,0 @@
-{"version":3,"file":"IngredientsSummary.d.ts","sourceRoot":"","sources":["IngredientsSummary.tsx"],"names":[],"mappings":"AAEA,OAAO,KAAK,EAAE,UAAU,EAAE,MAAM,oBAAoB,CAAC;AAErD,KAAK,KAAK,GAAG;IACT,WAAW,EAAE,UAAU,EAAE,CAAC;IAC1B,MAAM,EAAE,UAAU,EAAE,CAAA;CACvB,CAAA;AAID,MAAM,CAAC,OAAO,UAAU,kBAAkB,CAAC,EAAE,WAAW,EAAE,MAAM,EAAE,EAAE,KAAK,2CAwDxE"}
