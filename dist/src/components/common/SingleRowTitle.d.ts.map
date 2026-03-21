@@ -1,1 +1,0 @@
-{"version":3,"file":"SingleRowTitle.d.ts","sourceRoot":"","sources":["../../../../src/components/common/SingleRowTitle.tsx"],"names":[],"mappings":"AAAA,OAAO,mCAAmC,CAAC;AAI3C,KAAK,KAAK,GAAG;IACT,KAAK,EAAE,MAAM,CAAC;IACd,MAAM,EAAE,IAAI,GAAG,IAAI,GAAG,IAAI,GAAG,IAAI,GAAG,IAAI,GAAG,IAAI,CAAA;CAClD,CAAA;AAED,MAAM,CAAC,OAAO,UAAU,cAAc,CAAC,EAAC,KAAK,EAAE,MAAM,EAAC,EAAE,KAAK,2CAyB5D"}
