@@ -4,8 +4,9 @@ import {
     profileErrorTexts, 
     registerErrorTexts 
 } from "../data/error-texts";
+
+import { ERROR_TYPES } from "../../lib/validator";
 import { 
-    ERROR_TYPES, 
     loginValidationData, 
     modifiedRecipeValidationData, 
     newRecipeValidationData, 

@@ -1,4 +1,4 @@
-import { RECIPES_PER_PAGE } from "../../config";
+import { RECIPES_PER_PAGE } from "../config.js";
 export function getRecipesSummaryQuery(userId, cursor, additionalWhereClause = "") {
     const whereParams = [];
     if (cursor) {

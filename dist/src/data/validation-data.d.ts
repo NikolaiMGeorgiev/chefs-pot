@@ -1,13 +1,3 @@
-export declare const ERROR_TYPES: {
-    EMPTY: string;
-    NUMBER_ZERO: string;
-    NUMBER_NAN: string;
-    FILE_INVALID_TYPE: string;
-    TEXT_INVALID: string;
-    PASSWORD_NO_NUMBER: string;
-    PASSWORD_NO_SYMBOL: string;
-    PASSWORD_LENGTH: string;
-};
 export declare const modifiedRecipeValidationData: {
     "ingredients-name": {
         isRequired: boolean;

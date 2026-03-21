@@ -1,7 +1,7 @@
 import {} from "mysql2";
-import { RECIPES_PER_PAGE } from "../../config";
-import { db } from "../db";
-import * as helper from "../helpers/recipes";
+import { RECIPES_PER_PAGE } from "../config.js";
+import { db } from "../db.js";
+import * as helper from "../helpers/recipes.js";
 export async function getRecipesSummary(userId, cursor) {
     const params = userId !== undefined ? [userId] : [];
     if (cursor) {

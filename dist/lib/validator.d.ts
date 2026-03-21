@@ -1,3 +1,6 @@
+type GenericMap = {
+    [key: string]: any;
+};
 export declare const ERROR_TYPES: {
     EMPTY: string;
     NUMBER_ZERO: string;
@@ -129,9 +132,6 @@ export declare const profileValidationData: {
         type: string;
     };
 };
-export declare function getComponentFormData(formId: string): {
-    validationFn: Function;
-    sendData: Function;
-    submitSuccessMessage?: string;
-};
-//# sourceMappingURL=validation-data.d.ts.map
+export declare function validateData(data: GenericMap, validationData: GenericMap): true | GenericMap;
+export {};
+//# sourceMappingURL=validator.d.ts.map

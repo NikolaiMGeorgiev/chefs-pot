@@ -15,13 +15,12 @@ import {
     getUserRecipesSummary, 
     updateRecipe 
 } from "./models/recipes.js";
-import { addUser, getUserById, getUserByUsernameAndPassword, updateUserById } from "./models/users";
-import { HSOT_PORT } from "../config";
-import { validateData } from "../src/helpers/validation";
-import { newRecipeValidationData } from "../src/data/validation-data";
-import { getIngredients } from "./models/ingredients";
-import { addFavourite, getIsFavourite, removeFavourite } from "./models/favourites";
+import { addUser, getUserById, getUserByUsernameAndPassword, updateUserById } from "./models/users.js";
+import { HSOT_PORT } from "./config.js";
+import { getIngredients } from "./models/ingredients.js";
+import { addFavourite, getIsFavourite, removeFavourite } from "./models/favourites.js";
 import type { Ingredient, SelectedRecipeTypes } from "./types/recipes";
+import { newRecipeValidationData, validateData } from "../lib/validator.js";
 
 const app = express();
 const fileStorage = multer.diskStorage({
