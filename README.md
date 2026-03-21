@@ -30,11 +30,17 @@ In order to run the project you'll need:
 ## 4. Set-up
 1. Navigate to the root dir in the terminal and run:
 <pre>npm i</pre>
-This will install all the required modules.
+This will install all the required modules.  
+
 2. Create copies of the example config files in the src and server direcotries ("config.example.ts" files). Name the copies "config.ts" and edit the dummy values to the ones you need for your set-up.
+
 3. Run the build command with:
 <pre>npm run build</pre>
-This will create a dist directory in the root dir that mimics the directory structure of the project code but with the transpiled JS files.
+  This will create a dist directory in the root dir that mimics the directory structure of the project code but with the transpiled JS files.  
+
 4. Start your MySQL server. Conncet to it and create the DB using the schema in the "database.sql" file and the table data in the "database-data.sql" file.
+
 5. Start the server by running:
-<pre>node ./dist/server/app.js</pre>
+<pre>node ./dist/server/app.js</pre>  
+
+6. Navigate to your webpage trough the browser.
