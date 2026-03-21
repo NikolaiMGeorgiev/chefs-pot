@@ -1,5 +1,6 @@
 import { modifiedRecipeErrorTexts, newRecipeErrorTexts, profileErrorTexts, registerErrorTexts } from "../data/error-texts";
-import { ERROR_TYPES, loginValidationData, modifiedRecipeValidationData, newRecipeValidationData, profileValidationData, registerValidationData } from "../data/validation-data";
+import { ERROR_TYPES } from "../../lib/validator";
+import { loginValidationData, modifiedRecipeValidationData, newRecipeValidationData, profileValidationData, registerValidationData } from "../data/validation-data";
 export function validateData(data, validationData) {
     const errors = {};
     for (let key in validationData) {

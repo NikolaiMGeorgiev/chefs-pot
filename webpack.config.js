@@ -16,7 +16,7 @@ export default {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        include: resolve(__dirname, "src"),
+        include: [resolve(__dirname, "src"), resolve(__dirname, "lib")],
         use: {
           loader: 'babel-loader',
           options: {
@@ -28,7 +28,7 @@ export default {
         use: ['style-loader', 'css-loader'],
       }, {
         test: /\.tsx?$/,
-        include: resolve(__dirname, "src"),
+        include: [resolve(__dirname, "src"), resolve(__dirname, "lib")],
         use: {
           loader: "ts-loader",
           options: {

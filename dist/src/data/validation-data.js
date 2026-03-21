@@ -1,15 +1,5 @@
 import { sendLogin, sendNewRecipe, sendProfileUpdate, sendRegistration, updateRecipe } from "../helpers/data";
 import { validateLoginForm, validateModifiedRecipeForm, validateNewRecipeForm, validateProfileForm, validateRegisterForm } from "../helpers/validation";
-export const ERROR_TYPES = {
-    EMPTY: "EMPTY",
-    NUMBER_ZERO: "NUMBER_ZERO",
-    NUMBER_NAN: "NUMBER_NAN",
-    FILE_INVALID_TYPE: "FILE_INVALID_TYPE",
-    TEXT_INVALID: "TEXT_INVALID",
-    PASSWORD_NO_NUMBER: "PASSWORD_NO_NUMBER",
-    PASSWORD_NO_SYMBOL: "PASSWORD_NO_SYMBOL",
-    PASSWORD_LENGTH: "PASSWORD_LENGTH"
-};
 export const modifiedRecipeValidationData = {
     "ingredients-name": {
         isRequired: true,
