@@ -1,6 +1,7 @@
 import { resolve, dirname  } from 'path';
 import TerserPlugin from "terser-webpack-plugin";
 import { fileURLToPath } from 'url';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -11,6 +12,12 @@ export default {
     path: resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: 'index.html',
+    }),
+  ],
   devtool: "source-map",
   module: {
     rules: [
