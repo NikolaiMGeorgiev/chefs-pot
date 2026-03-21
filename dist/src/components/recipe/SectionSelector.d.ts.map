@@ -1,1 +1,0 @@
-{"version":3,"file":"SectionSelector.d.ts","sourceRoot":"","sources":["../../../../src/components/recipe/SectionSelector.tsx"],"names":[],"mappings":"AAAA,OAAO,mCAAmC,CAAC;AAC3C,OAAO,KAAK,EAAE,WAAW,EAAE,MAAM,oBAAoB,CAAC;AAEtD,KAAK,KAAK,GAAG;IACT,OAAO,EAAE,WAAW,CAAC;IACrB,UAAU,EAAE,QAAQ,CAAA;CACvB,CAAA;AAED,MAAM,CAAC,OAAO,UAAU,eAAe,CAAC,EAAE,OAAO,EAAE,UAAU,EAAE,EAAE,KAAK,2CAerE"}

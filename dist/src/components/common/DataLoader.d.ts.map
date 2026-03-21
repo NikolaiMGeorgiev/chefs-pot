@@ -1,1 +1,0 @@
-{"version":3,"file":"DataLoader.d.ts","sourceRoot":"","sources":["../../../../src/components/common/DataLoader.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAuC,KAAK,YAAY,EAAE,MAAM,OAAO,CAAC;AAK/E,KAAK,KAAK,GAAG;IACT,OAAO,EAAE,QAAQ,CAAC;IAClB,GAAG,EAAE,MAAM,CAAC;IACZ,QAAQ,EAAE,YAAY,CAAA;CACzB,CAAA;AAED,wBAAgB,UAAU,CAAC,EAAE,OAAO,EAAE,GAAG,EAAE,QAAQ,EAAE,EAAE,KAAK,2CAgD3D"}
