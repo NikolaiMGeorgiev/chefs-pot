@@ -6,7 +6,7 @@ import QuantitySelector from "./QuantitySelector";
 type Props = {
     portions: number, 
     isOwn: boolean, 
-    onPortionChange: Function, 
+    onPortionChange: (portion: number) => void, 
     onEditClick: MouseEventHandler<HTMLButtonElement>
 }
 

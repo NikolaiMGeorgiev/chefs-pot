@@ -1,8 +1,12 @@
-import { useEffect, useEffectEvent } from "react";
+import { type ActionDispatch, useEffect, useEffectEvent } from "react";
 import { getIngredients, isResponseJSON } from "../helpers/data";
+import { type IngredientFilterAction } from "../types/recipe";
 
 
-export default function useFilteredIngredientsSearch(filterValue: string, dispatch: Function) {
+export default function useFilteredIngredientsSearch(
+    filterValue: string,
+    dispatch: ActionDispatch<[action: IngredientFilterAction]>
+) {
     const sendFilterRequest = useEffectEvent((value: string) => {
         getIngredients(value)
             .then(response => {
@@ -12,16 +16,16 @@ export default function useFilteredIngredientsSearch(filterValue: string, dispat
                     return [];
                 }
             }).then(data => {
-                dispatch({ type: "set_filtered_ingredients", ingredients: "ingredients" in data ? data.ingredients : [] });
-                dispatch({ type: "loaded", isLoading: false });
+                dispatch({ type: "set_filtered_ingredients", value: "ingredients" in data ? data.ingredients : [] });
+                dispatch({ type: "loaded", value: false });
             })
     })
 
     useEffect(() => {
-        dispatch({type: "loaded", isLoading: true});
+        dispatch({type: "loaded", value: true});
 
         if (!filterValue) {
-            dispatch({type: "loaded", isLoading: false});
+            dispatch({type: "loaded", value: false});
             return;
         }
 

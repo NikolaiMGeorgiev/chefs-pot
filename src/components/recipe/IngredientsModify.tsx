@@ -4,7 +4,7 @@ import { getItemEventHandlers } from "../../helpers/recipe";
 import IngredientInputs from "./IngredientInputs";
 import InputError from "./InputError";
 import type { Ingredient, IngredientType } from "../../types/recipe";
-import type { ValidatedFormProps } from "../../types/data";
+import type { ValidatedFormProps } from "../../types/formsData";
 
 export default function IngredientsModify({ data, errors, errorInputRef, onValueChange }: ValidatedFormProps) {
     const ingredientsList = data.ingredients

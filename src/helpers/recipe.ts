@@ -1,7 +1,8 @@
 import { useSearchParams } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import type { GenericMap } from "../types/common";
-import type { RecipeModifyData, RecipeOriginalData, RecipeType } from "../types/recipe";
+import type { RecipeOriginalData, RecipeType } from "../types/recipe";
+import { type FormChangeHandler } from "../types/functions";
 
 export function handlRecipeRowAdd(data: GenericMap, type: string, row: number) {
     const newData = [];
@@ -39,7 +40,11 @@ export function handleRowValueChange(data: GenericMap, type: string, row: number
     return newData;
 }
 
-export function getItemEventHandlers(data: GenericMap, itemType: string, onValueChange: Function) {
+export function getItemEventHandlers(
+    data: GenericMap, 
+    itemType: string, 
+    onValueChange: FormChangeHandler
+) {
     return {
         onItemAdd: (row: number) => {
             onValueChange(itemType, handlRecipeRowAdd(data, itemType, row));

@@ -2,7 +2,7 @@ import { getItemEventHandlers } from "../../helpers/recipe";
 import InputError from "./InputError";
 import StepInputs from "./StepInputs";
 import type { ModifyStepData } from "../../types/recipe";
-import type { ValidatedFormProps } from "../../types/data";
+import type { ValidatedFormProps } from "../../types/formsData";
 
 export default function StepsModify({ data, errors, onValueChange, errorInputRef }: ValidatedFormProps) {
     const eventHandlers = getItemEventHandlers(data, "steps", onValueChange);

@@ -1,10 +1,11 @@
 import type { MouseEventHandler } from "react";
 import "../../styles/recipe-toolbar.css";
+import { type FormChangeHandler } from "../../types/functions";
 
 type Props = {
     portions: number, 
     onCancelEdit: MouseEventHandler<HTMLButtonElement>, 
-    onValueChange: Function
+    onValueChange: FormChangeHandler
 }
 
 export default function RecipeToolbarEdit({ portions, onCancelEdit, onValueChange }: Props) {

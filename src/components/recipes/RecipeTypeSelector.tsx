@@ -19,7 +19,7 @@ export const recipeTypes = [
 
 type Props = {
     selectedTypes: string[], 
-    setSelectedTypes: Function
+    setSelectedTypes: (types: string[]) => void
 }
 
 export default function RecipeTypeSelector({ selectedTypes, setSelectedTypes }: Props) {
@@ -34,7 +34,7 @@ export default function RecipeTypeSelector({ selectedTypes, setSelectedTypes }: 
 
     const handleClick = (e: UIEvent<HTMLButtonElement>) => {
         const target = e.currentTarget;
-        const type = target.dataset.type;
+        const type = target.dataset.type as string;
         const isTypeSelected = types.find(typeData => typeData.type == type)?.isSelected;
         if (isTypeSelected) {
             setSelectedTypes(selectedTypes.filter(selectedType => selectedType != type));

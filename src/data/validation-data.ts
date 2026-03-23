@@ -93,16 +93,14 @@ export const profileValidationData = {
 };
 
 export function getComponentFormData(formId: string) {
-    return formData[formId] ? formData[formId] : {
-        validationFn: (f: any) => f,
-        sendData: (f: any) => f
-    };
+    return formData[formId]!;
 }
 
 const formData: { 
     [key: string]: {
-        validationFn: Function,
-        sendData: Function, 
+        validationFn: (data: any) => 
+            true | { [key: string]: string | object | any[]; },
+        sendData: (data: any) => Promise<Response>, 
         submitSuccessMessage?: string
     }
 } = {

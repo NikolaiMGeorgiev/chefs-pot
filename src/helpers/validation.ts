@@ -14,7 +14,7 @@ import {
     registerValidationData 
 } from "../data/validation-data";
 import type { GenericMap } from "../types/common";
-import type { LoginData, ProfileData, RegistrationData } from "../types/data";
+import type { LoginData, ProfileData, RegistrationData } from "../types/formsData";
 import type { NewRecipeData, RecipeModifyData } from "../types/recipe";
 
 type InputTypes = "list" | "text" | "number" | "file" | "password" | "email";

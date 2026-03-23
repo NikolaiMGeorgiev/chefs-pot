@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { getSinglePasswordError } from "../helpers/validation";
 import ValidatedForm from "./common/ValidatedForm";
 import InputWithLabel from "./common/InputWithLabel";
-import type { ValidatedFormProps } from "../types/data";
+import type { ValidatedFormProps } from "../types/formsData";
 
 export default function RegisterForm() {
     const data = {

@@ -1,4 +1,4 @@
-import type { GenericMap } from "../types/common"
+import { type IngredientFilterAction } from "../types/recipe"
 
 type StateProps = {
     value: string,
@@ -8,7 +8,7 @@ type StateProps = {
     isLoading: boolean
 }
 
-export default function recipeFilterReducer(state: StateProps, action: GenericMap) {
+export default function recipeFilterReducer(state: StateProps, action: IngredientFilterAction): StateProps {
     switch(action.type) {
         case "submit": {
             return {
@@ -44,7 +44,7 @@ export default function recipeFilterReducer(state: StateProps, action: GenericMa
                 ...state,
                 selectedIngredients: [
                     ...state.selectedIngredients, 
-                    action.ingredient
+                    action.value
                 ]
             }
         }
@@ -52,14 +52,14 @@ export default function recipeFilterReducer(state: StateProps, action: GenericMa
             return {
                 ...state,
                 selectedIngredients: state.selectedIngredients.filter(
-                    (selectedIngredient: string) => selectedIngredient != action.ingredient
+                    (selectedIngredient: string) => selectedIngredient != action.value
                 )
             }
         }
         case "set_filtered_ingredients": {
             return {
                 ...state,
-                filteredIngredients: action.ingredients
+                filteredIngredients: action.value
             }
         }
         case "toggle": {
@@ -71,7 +71,7 @@ export default function recipeFilterReducer(state: StateProps, action: GenericMa
         case "loaded": {
             return {
                 ...state,
-                isLoading: action.isLoading
+                isLoading: action.value
             }
         }
         default: return state

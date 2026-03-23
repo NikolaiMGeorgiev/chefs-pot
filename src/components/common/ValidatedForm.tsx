@@ -1,4 +1,6 @@
 import { 
+    type Dispatch,
+    type SetStateAction,
     useEffect, 
     useRef, 
     useState, 
@@ -10,7 +12,7 @@ import Popup from "./Popup";
 import useFormSubmiter from "../../hooks/useFormSubmiter";
 import { getComponentFormData } from "../../data/validation-data";
 import type { GenericMap } from "../../types/common";
-import type { ValidatedFormProps } from "../../types/data";
+import type { ValidatedFormProps } from "../../types/formsData";
 
 
 type Props = {
@@ -98,7 +100,7 @@ export default function ValidatedForm({
     )
 }
 
-function mergeExternalData(data: GenericMap, externalData: GenericMap, setData: Function) {
+function mergeExternalData(data: GenericMap, externalData: GenericMap, setData: Dispatch<SetStateAction<object>>) {
     if (!Object.keys(externalData).length) {
         return;
     }

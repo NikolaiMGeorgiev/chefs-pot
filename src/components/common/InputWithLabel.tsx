@@ -1,3 +1,4 @@
+import { type FormChangeHandler } from "../../types/functions";
 import InputError from "../recipe/InputError";
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
     type?: string, 
     labelText: string, 
     errorText: string, 
-    onValueChange: Function, 
+    onValueChange: FormChangeHandler, 
 }
 
 export default function InputWithLabel({ 

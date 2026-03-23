@@ -34,15 +34,7 @@ export type Ingredient = {
     unit: Unit
 }
 
-export enum Unit {
-    gr = "gr",
-    mg = "mg",
-    ml = "ml",
-    tbs = "tbs",
-    ts = "ts",
-    cups = "cups",
-    none = "none"
-}
+export type Unit = "gr" | "mg" | "ml" | "tbs" | "ts" | "cups" | "none";
 
 export type RecipeSummaryData = Recipe & {
     portions: number,
@@ -80,3 +72,8 @@ export type RecipeType = "original" | "my";
 export type IngredientType = "ingredients" | "spices";
 
 export type SectionType = "ingredients" | "steps";
+
+export type IngredientFilterAction = {
+    value?: any;
+    type: string;
+};

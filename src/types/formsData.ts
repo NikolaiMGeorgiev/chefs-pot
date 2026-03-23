@@ -1,5 +1,6 @@
 import type { RefObject } from "react"
 import type { GenericMap } from "./common"
+import { type FormChangeHandler } from "./functions"
 
 export type RegistrationData = {
     firstName: string, 
@@ -23,5 +24,5 @@ export type ValidatedFormProps = {
     data: GenericMap,
     errors: GenericMap,
     errorInputRef?: RefObject<HTMLElement | null> | undefined,
-    onValueChange: Function
+    onValueChange: FormChangeHandler
 }

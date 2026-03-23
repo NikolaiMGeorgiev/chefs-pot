@@ -126,12 +126,12 @@ function getFavouriteCountQuery() {
 function getIsFavouriteQuery() {
     return `
         LEFT JOIN (
-            SELECT CASE
+            SELECT recipe_id, CASE
                 WHEN recipe_id IS NULL THEN false
                 ELSE true
             END as favourite
             FROM recipes_favourite 
             WHERE user_id = ?
-        ) rf ON r.id = rf.favourite
+        ) rf ON r.id = rf.recipe_id
     `;
 }

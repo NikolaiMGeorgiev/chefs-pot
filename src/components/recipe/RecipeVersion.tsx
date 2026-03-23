@@ -3,7 +3,7 @@ import type { RecipeType } from "../../types/recipe";
 
 type Props = {
     version: RecipeType, 
-    onVersionChange: Function, 
+    onVersionChange: (version: RecipeType) => void, 
     hasModifiedData: boolean
 }
 

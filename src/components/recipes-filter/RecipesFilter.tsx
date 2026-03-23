@@ -13,7 +13,7 @@ import SelectedIngredients from "./SelectedIngredients";
 import type { RecipeType } from "../../types/recipe";
 
 type Props = {
-    updateUrl: Function,
+    updateUrl: (url: string) => void,
     recipesType: RecipeType
 }
 

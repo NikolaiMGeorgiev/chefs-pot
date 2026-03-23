@@ -1,8 +1,10 @@
+import { type ActionDispatch } from "react";
 import ExIcon from "../icons/ExIcon";
+import { type IngredientFilterAction } from "../../types/recipe";
 
 type Props = {
     filterValue: string, 
-    dispatch: Function
+    dispatch: ActionDispatch<[action: IngredientFilterAction]>
 }
 
 export default function IngredientsSearchBox({ filterValue, dispatch }: Props) {

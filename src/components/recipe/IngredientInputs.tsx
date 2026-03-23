@@ -11,9 +11,9 @@ type Props = {
     type: IngredientType,
     row: number, 
     isOnlyRow: boolean,
-    onItemAdd: Function, 
-    onItemRemove: Function,
-    onValueChange: Function
+    onItemAdd: (row: number) => void, 
+    onItemRemove: (row: number) => void,
+    onValueChange:  (row: number, name: string, value: any) => void
 }
 
 export default function IngredientInputs({ 
@@ -64,7 +64,7 @@ export default function IngredientInputs({
                     attributes={unitSelectorAttrs} 
                     name={`${type}-unit`} 
                     value={unit} 
-                    onChange={(value: Unit) => onValueChange(row, "unit", value)}
+                    onChange={(value?: string) => onValueChange(row, "unit", value)}
                 />
             </label>
             <button className="add-row-btn" type="button" onClick={() => onItemAdd(row)}>

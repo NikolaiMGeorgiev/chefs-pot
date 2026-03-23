@@ -2,7 +2,7 @@ import "../../styles/quantity-selector.css";
 
 type Props = {
     portions: number, 
-    onPortionChange: Function
+    onPortionChange: (portion: number) => void
 }
 
 export default function QuantitySelector({portions, onPortionChange}: Props) {

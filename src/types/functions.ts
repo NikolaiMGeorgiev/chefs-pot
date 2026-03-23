@@ -1,0 +1,1 @@
+export type FormChangeHandler = (name: string, value: any, row?: number | undefined) => void

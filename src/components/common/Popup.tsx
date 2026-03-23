@@ -2,7 +2,7 @@ import "../../styles/popup.css";
 
 type Props = {
     message: string, 
-    setShow: Function
+    setShow: (isShown: boolean) => void
 }
 
 export default function Popup({ message, setShow }: Props) {

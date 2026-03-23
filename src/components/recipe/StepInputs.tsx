@@ -6,9 +6,9 @@ type Props = {
     text: string, 
     row: number, 
     isOnlyRow: boolean,
-    onItemAdd: Function, 
-    onItemRemove: Function, 
-    onValueChange: Function
+    onItemAdd: (row: number) => void, 
+    onItemRemove: (row: number) => void,
+    onValueChange:  (row: number, name: string, value: string) => void
 }
 
 export default function StepInputs({ 

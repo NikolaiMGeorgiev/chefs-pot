@@ -1,9 +1,10 @@
-import type { JSX } from "react";
+import type { ActionDispatch, JSX } from "react";
 import IngredientButton from "./IngredientButton";
+import { type IngredientFilterAction } from "../../types/recipe";
 
 type Props = {
     selectedIngredients: string[], 
-    dispatch: Function
+    dispatch: ActionDispatch<[action: IngredientFilterAction]>
 }
 
 export default function SelectedIngredients({ selectedIngredients, dispatch }: Props) {

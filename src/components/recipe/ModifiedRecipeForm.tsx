@@ -3,7 +3,7 @@ import "../../styles/modified-recipe-form.css";
 import IngredientsModify from "./IngredientsModify";
 import RecipeToolbarEdit from "./RecipeToolbarEdit";
 import StepsModify from "./StepsModify";
-import type { ValidatedFormProps } from "../../types/data";
+import type { ValidatedFormProps } from "../../types/formsData";
 
 export default function ModifiedRecipeForm({ data, errors, errorInputRef, onValueChange }: ValidatedFormProps) {
     const { portions, onCancelEdit, section } = data;

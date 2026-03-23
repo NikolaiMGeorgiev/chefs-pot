@@ -1,6 +1,7 @@
-import type { JSX } from "react";
+import type { ActionDispatch, JSX } from "react";
 import Loader from "../common/Loader";
 import IngredientButton from "./IngredientButton";
+import { type IngredientFilterAction } from "../../types/recipe";
 
 type Props = {
     filter: {
@@ -8,7 +9,7 @@ type Props = {
         selectedIngredients: string[],
         isLoading: boolean
     }, 
-    dispatch: Function
+    dispatch: ActionDispatch<[action: IngredientFilterAction]>
 }
 
 export default function FilteredIngredients({ filter, dispatch }: Props) {

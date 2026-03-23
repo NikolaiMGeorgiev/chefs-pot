@@ -6,9 +6,9 @@ import type { UIEvent } from "react";
 
 type Props  = {
     data: RecipeSummaryData[],
-    updateUrl: Function,
+    updateUrl: (url: string) => void,
     type: RecipeType,
-    updateCursor: Function,
+    updateCursor: (cursor: number) => void,
     isLoading: boolean
 }
 

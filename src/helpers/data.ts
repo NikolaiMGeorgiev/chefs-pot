@@ -1,6 +1,6 @@
 import { HOST, HSOT_PORT } from "../config";
 import type { FavouriteButtonAction } from "../types/common";
-import type { LoginData, ProfileData, RegistrationData } from "../types/data";
+import type { LoginData, ProfileData, RegistrationData } from "../types/formsData";
 import type { Ingredient, RecipeModifyData } from "../types/recipe";
 
 export function updateRecipe(data: RecipeModifyData) {

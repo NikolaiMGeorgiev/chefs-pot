@@ -1,9 +1,10 @@
+import { type Dispatch, type SetStateAction } from "react";
 import "../../styles/section-selector.css";
 import type { SectionType } from "../../types/recipe";
 
 type Props = {
     section: SectionType, 
-    setSection: Function
+    setSection: Dispatch<SetStateAction<SectionType>>
 }
 
 export default function SectionSelector({ section, setSection }: Props) {

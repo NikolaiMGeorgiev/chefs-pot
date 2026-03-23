@@ -48,7 +48,7 @@ app.use(cookieParser());
 app.get('/recipes', autheticateToken, async (req: Request<{}, {}, {}, {cursor?: number}>, res: Response) => {
     try {
         const { cursor } = req.query;
-        const userId = req.user?.id as number;
+        const userId = Number(req.user?.id);
         const results = await getRecipesSummary(userId, cursor);
         res.json(results);
     } catch (error) {

@@ -9,7 +9,7 @@ type SelectorProps = {
     items: GenericMap, 
     name: string,
     value: string,
-    onChange: Function,
+    onChange: (value: string) => void,
     attributes: GenericMap
 }
 
@@ -37,7 +37,7 @@ export default function Selector({
         const target = e.currentTarget;
         
         if (target.classList.value.split(" ").includes("selector__option")) {
-            onChange(target.dataset.value);
+            onChange(target.dataset.value as string);
             setIsExpanded(!isExpanded);
             return;
         }

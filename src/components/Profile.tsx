@@ -7,7 +7,7 @@ import { DataLoader } from "./common/DataLoader";
 import { HOST, HSOT_PORT } from "../config";
 import ValidatedForm from "./common/ValidatedForm";
 import InputWithLabel from "./common/InputWithLabel";
-import type { ValidatedFormProps } from "../types/data";
+import type { ValidatedFormProps } from "../types/formsData";
 
 export default function ProfileLoader() {
     const [data, setData] = useState({});

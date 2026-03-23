@@ -8,7 +8,7 @@ import IngredientsModify from "./recipe/IngredientsModify";
 import StepsModify from "./recipe/StepsModify";
 import { v4 as uuid } from "uuid";
 import InputWithLabel from "./common/InputWithLabel";
-import type { ValidatedFormProps } from "../types/data";
+import type { ValidatedFormProps } from "../types/formsData";
 import type { UIEvent } from "react";
 
 

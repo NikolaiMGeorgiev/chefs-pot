@@ -1,10 +1,11 @@
-import { useEffect, useEffectEvent, useState, type ReactElement } from "react";
+import { type Dispatch, type SetStateAction, useEffect, useEffectEvent, useState, type ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import { isResponseJSON } from "../../helpers/data";
 import Loader from "./Loader";
+import { type RecipeResponseData } from "../../types/recipe";
 
 type Props = {
-    setData: Function, 
+    setData: Dispatch<SetStateAction<{} | RecipeResponseData>>, 
     url: string, 
     children: ReactElement
 }

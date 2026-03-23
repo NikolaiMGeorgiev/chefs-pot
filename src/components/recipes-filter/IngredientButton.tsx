@@ -1,5 +1,7 @@
 import PlusIcon from "../icons/PlusIcon";
 import ExIcon from "../icons/ExIcon";
+import { type ActionDispatch } from "react";
+import { type IngredientFilterAction } from "../../types/recipe";
 
 type ButtonAction = "add" | "remove";
 
@@ -7,7 +9,7 @@ type Props = {
     type: ButtonAction, 
     ingredient: string,
     selectedIngredients: string[],
-    dispatch: Function
+    dispatch: ActionDispatch<[action: IngredientFilterAction]>
 }
 
 export default function IngredientButton({
@@ -23,9 +25,9 @@ export default function IngredientButton({
 
     const updateSelectedIngredients = (action: ButtonAction, ingredient: string) => {
         if (action == "add") {
-            dispatch({type: "add_selected_ingr", ingredient});
+            dispatch({type: "add_selected_ingr", value: ingredient});
         } else {
-            dispatch({type: "remove_selected_ingr", ingredient});
+            dispatch({type: "remove_selected_ingr", value: ingredient});
         }
     }
 

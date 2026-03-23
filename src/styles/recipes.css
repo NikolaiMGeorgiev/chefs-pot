@@ -1,6 +1,6 @@
 #app {
     position: relative;
-    top: 50px;
+    top: 32px;
     height: calc(100% - 50px);
     overflow: hidden;
 }
