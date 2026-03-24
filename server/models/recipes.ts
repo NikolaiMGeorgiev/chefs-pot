@@ -4,7 +4,7 @@ import { db } from "../db.js";
 import * as helper from "../helpers/recipes.js";
 import type { RecipeData, SelectedRecipeTypes } from "../types/recipes.js";
 
-export async function getRecipesSummary(userId: number, cursor?: number) {
+export async function getRecipesSummary(userId?: number, cursor?: number) {
     const params = userId !== undefined ? [userId] : [];
     if (cursor) {
         params.push(cursor);
@@ -18,7 +18,7 @@ export async function getRecipesSummary(userId: number, cursor?: number) {
     return results;
 }
 
-export async function getRecipesByIngredients(ingredients: string | string[], cursor: number, userId: number) {
+export async function getRecipesByIngredients(ingredients: string | string[], cursor: number, userId?: number) {
     if (typeof ingredients == "string") {
         ingredients = [ingredients];
     }
@@ -46,9 +46,9 @@ export async function getRecipesByIngredients(ingredients: string | string[], cu
 
 export async function getUserRecipesByIngredients(
     ingredients: string | string[], 
-    userId: number, 
     cursor: number, 
-    selectedRecipeTypes: SelectedRecipeTypes
+    selectedRecipeTypes: SelectedRecipeTypes,
+    userId?: number
 ) {
     if (userId === undefined) {
         return [];
@@ -57,7 +57,7 @@ export async function getUserRecipesByIngredients(
         ingredients = [ingredients];
     }
     if (!ingredients || !ingredients.length) {
-        return getUserRecipesSummary(userId, selectedRecipeTypes);
+        return getUserRecipesSummary(selectedRecipeTypes, 0, userId);
     }
 
     const queryValues = helper.getUserRecipesSummaryQueryParams(userId, selectedRecipeTypes);
@@ -91,7 +91,7 @@ export async function getRecipeById(id: number) {
     return (results as RecipeData[])[0];
 }
 
-export async function getUserRecipesSummary(userId: number, selectedRecipeTypes: SelectedRecipeTypes, cursor?: number) {
+export async function getUserRecipesSummary(selectedRecipeTypes: SelectedRecipeTypes, cursor?: number, userId?: number) {
     if (userId === undefined) {
         return [];
     }
@@ -122,7 +122,7 @@ export async function getUserRecipesSummary(userId: number, selectedRecipeTypes:
 }
 
 
-export async function getModifiedRecipeById(userId: number, recipeId: number) {
+export async function getModifiedRecipeById(recipeId: number, userId?: number) {
     if (userId === undefined) {
         return;
     }

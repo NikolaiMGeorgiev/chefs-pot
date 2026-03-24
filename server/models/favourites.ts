@@ -17,7 +17,7 @@ export async function removeFavourite(recipeId: number, userId: number) {
     return result;
 }
 
-export async function getIsFavourite(recipeId: number, userId: number) {
+export async function getIsFavourite(recipeId: number, userId?: number) {
     if (userId === undefined) {
         return;
     }

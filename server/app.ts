@@ -23,6 +23,7 @@ import {
 import errorHandler from "./middleware/errorHandler.js";
 import autheticateToken from "./middleware/authenticateToken.js";
 import { fileUploader } from "./middleware/fileUploader.js";
+import { getSearchIngredient } from "./routes/filter.js";
 
 const app = express();
 
@@ -37,7 +38,7 @@ app.get('/api/recipes/:recipeId', autheticateToken, getRecipe)
 
 app.get('/api/my-recipes', autheticateToken, getMyRecipes)
 
-app.get('/api/search-ingredients/:ingredient', getIngredients)
+app.get('/api/search-ingredients/:ingredient', getSearchIngredient)
 
 app.get('/api/filtered-recipes', autheticateToken, getFilteredRecipes)
 

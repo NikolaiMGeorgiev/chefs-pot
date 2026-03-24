@@ -14,13 +14,14 @@ import { addFavourite, getIsFavourite, removeFavourite } from "../models/favouri
 import { getUserById } from "../models/users.js";
 import type { Ingredient, SelectedRecipeTypes } from "../types/recipes";
 import { newRecipeValidationData, validateData } from "../../lib/validator.js";
+import { getUserIdFromToken } from "../helpers/recipes.js"
 
 
-export async function getAllRecipes(req: Request<{}, {}, {}, {cursor?: number}>, res: Response, next: NextFunction) {
+export async function getAllRecipes(req: Request, res: Response, next: NextFunction) {
     try {
         const { cursor } = req.query;
-        const userId = Number(req.user?.id);
-        const results = await getRecipesSummary(userId, cursor);
+        const userId = getUserIdFromToken(req);
+        const results = await getRecipesSummary(userId, Number(cursor ? cursor: 0));
         res.json(results);
     } catch (error) {
         next(error)
@@ -29,14 +30,14 @@ export async function getAllRecipes(req: Request<{}, {}, {}, {cursor?: number}>,
 
 export async function getRecipe (req: Request, res: Response, next: NextFunction) {
     try {
-        const userId = req.user?.id;
+        const userId = getUserIdFromToken(req)
         const recipeData = await getRecipeById(Number(req.params.recipeId));
         if (!recipeData) {
             throw new Error("invalid recipe ID");
         }
-        const isFavourite = await getIsFavourite(Number(req.params.recipeId), Number(userId));
+        const isFavourite = await getIsFavourite(Number(req.params.recipeId), userId);
         const userData = await getUserById(recipeData["creator_id"]);
-        const modifiedRecipeData = await getModifiedRecipeById(Number(userId), recipeData.id);
+        const modifiedRecipeData = await getModifiedRecipeById(recipeData.id, userId);
 
         if (!userData) {
             throw new Error("invalid user ID");
@@ -66,8 +67,8 @@ export async function getMyRecipes(req: Request, res: Response, next: NextFuncti
         recipeTypes?.forEach((recipeType: string) => {
             selectedRecipeTypes[recipeType as keyof SelectedRecipeTypes] = recipeType;
         });
-        const userId = req.user?.id;
-        const results = await getUserRecipesSummary(Number(userId), selectedRecipeTypes, cursor);
+        const userId = getUserIdFromToken(req);
+        const results = await getUserRecipesSummary(selectedRecipeTypes, cursor, userId);
         res.json(results);
     } catch (error) {
         next(error)
@@ -87,10 +88,10 @@ export async function getFilteredRecipes(req: Request, res: Response, next: Next
         recipeTypes?.forEach((recipeType: string) => {
             selectedRecipeTypes[recipeType as keyof SelectedRecipeTypes] = recipeType;
         })
-        const userId = req.user?.id;
+        const userId = getUserIdFromToken(req);
         const result = await (type == "my" ? 
-            getUserRecipesByIngredients(ingr ? ingr : "", Number(userId), Number(cursor), selectedRecipeTypes) :
-            getRecipesByIngredients(ingr ? ingr : "", Number(cursor), Number(userId))
+            getUserRecipesByIngredients(ingr ? ingr : "", Number(cursor), selectedRecipeTypes, userId) :
+            getRecipesByIngredients(ingr ? ingr : "", Number(cursor), userId)
         );
         res.json(result);
     } catch (error) {
@@ -108,8 +109,11 @@ export async function createModifiedRecipe(req: Request, res: Response, next: Ne
             portions
 
         } = req.body;
-        const userId = req.user?.id;
-        await addModifiedRecipe(Number(originalRecipeId), Number(userId), ingredients, spices, steps, portions);
+        const userId = getUserIdFromToken(req);
+        if (userId === undefined) {
+            throw new Error("Invalid request");
+        }
+        await addModifiedRecipe(Number(originalRecipeId), userId, ingredients, spices, steps, portions);
         res.send();
     } catch (error) {
         next(error)
@@ -126,10 +130,10 @@ export async function updateOriginalRecipe(req: Request, res: Response, next: Ne
             title,
         } = req.body;
         const recipeId = req.params.recipeId;
-        const userId = req.user?.id;
+        const userId = getUserIdFromToken(req);
         const recipeData = await getRecipeById(Number(recipeId));
 
-        if (!recipeData) {
+        if (!recipeData || userId === undefined) {
             throw new Error("Invalid resipe request")
         }
 
@@ -164,11 +168,15 @@ export async function createOriginalRecipe(req: Request, res: Response, next: Ne
             res.status(400).send("Invalid data");
         }
 
-        const userId = req.user?.id;
+        const userId = getUserIdFromToken(req);
+
+        if (userId === undefined) {
+            throw new Error("Invalid request");
+        }
 
         const newReicpeId = await addRecipe(
             title, 
-            Number(userId),
+            userId,
             image, 
             ingredients, 
             spices, 
@@ -187,10 +195,13 @@ export async function createOriginalRecipe(req: Request, res: Response, next: Ne
 export async function updateFavouriteRecipe(req: Request, res: Response, next: NextFunction) {
     try {
         const { recipeId, action } = req.body;
-        const userID= Number(req.user?.id);
+        const userId= getUserIdFromToken(req);
+        if (userId === undefined) {
+            throw new Error("Invalid request");
+        }
         const result = action == "add" ? 
-            await addFavourite(recipeId, userID) : 
-            await removeFavourite(recipeId, userID);
+            await addFavourite(recipeId, userId) : 
+            await removeFavourite(recipeId, userId);
         res.send();
     } catch (error) {
         next(error)

@@ -3,6 +3,7 @@ import RecipeSummary from "./RecipeSummary";
 import Loader from "../common/Loader";
 import type { RecipeSummaryData, RecipeType } from "../../types/recipe";
 import type { UIEvent } from "react";
+import { NO_RECIPES } from "../../data/texts"
 
 type Props  = {
     data: RecipeSummaryData[],
@@ -50,9 +51,7 @@ export default function RecipesList({ data, updateUrl, type, updateCursor, isLoa
         } else {
             return (
                 <p className="recipes-empty-text">
-                    { data.length ? 
-                        "No recipes match filter. Try removing some ingredients from the filter." :
-                        "No recipes found." }
+                    { NO_RECIPES }
                 </p>
             )
         }
@@ -61,7 +60,7 @@ export default function RecipesList({ data, updateUrl, type, updateCursor, isLoa
     return (
         <>
             <RecipesFilter updateUrl={updateUrl} recipesType={type} />
-            <div id="recipes" onScroll={handleScroll}>
+            <div id="recipes" onScroll={handleScroll} data-testid="recipes">
                 {getRecipesComponents()}
             </div>
         </>

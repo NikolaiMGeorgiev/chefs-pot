@@ -1,8 +1,9 @@
 import type { RowDataPacket } from "mysql2";
 import { RECIPES_PER_PAGE } from "../config.js";
 import type { SelectedRecipeTypes } from "../types/recipes";
+import type { Request } from "express";
 
-export function getRecipesSummaryQuery(userId: number, cursor?: number,  additionalWhereClause = "") {
+export function getRecipesSummaryQuery(userId?: number, cursor?: number,  additionalWhereClause = "") {
     const whereParams = [];
     if (cursor) {
         whereParams.push("r.id > ?");
@@ -134,4 +135,8 @@ function getIsFavouriteQuery() {
             WHERE user_id = ?
         ) rf ON r.id = rf.recipe_id
     `;
+}
+
+export function getUserIdFromToken(req: Request) {
+    return req.user?.id !== undefined && !isNaN(Number(req.user.id)) ? Number(req.user.id) : undefined;
 }

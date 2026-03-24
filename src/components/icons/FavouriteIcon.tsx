@@ -1,6 +1,6 @@
 export default function FavouriteIcon() {
     return (
-        <svg className="favourite-icon icon" viewBox="0 0 64 64" enable-background="new 0 0 64 64">
+        <svg className="favourite-icon icon" viewBox="0 0 64 64" enableBackground="new 0 0 64 64">
             <g>
                 <path className="favourite-icon__filler" d="M58.714,29.977c0,0-0.612,0.75-1.823,1.961S33.414,55.414,33.414,55.414C33.023,55.805,32.512,56,32,56
                     s-1.023-0.195-1.414-0.586c0,0-22.266-22.266-23.477-23.477s-1.823-1.961-1.823-1.961C3.245,27.545,2,24.424,2,21

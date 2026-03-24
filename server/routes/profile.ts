@@ -11,6 +11,7 @@ import {
     getUserByUsernameAndPassword, 
     updateUserById 
 } from "../models/users.js";
+import { getUserIdFromToken } from "../helpers/recipes.js";
 
 const cookieSettings: CookieOptions = {
     httpOnly: true,
@@ -21,8 +22,11 @@ const cookieSettings: CookieOptions = {
 
 export async function getProfile(req: Request, res: Response, next: NextFunction) {
     try {
-        const userId = req.user?.id;
-        const results = await getUserById(Number(userId));
+        const userId = getUserIdFromToken(req);
+        if (userId === undefined) {
+            throw new Error("Invalid user ID");
+        }
+        const results = await getUserById(userId);
 
         if (!results) {
             throw new Error("Invalid request")
@@ -68,7 +72,10 @@ export async function loginUser (req: Request, res: Response, next: NextFunction
 export async function updateUser(req: Request, res: Response, next: NextFunction) {
     try {
         const { username, email } = req.body;
-        const userId = Number(req.user?.id);
+        const userId = getUserIdFromToken(req);
+        if (userId === undefined) {
+            throw new Error("Invalid user ID");
+        }
         const userQueryResult = await updateUserById(userId, username, email);
         res.send();
     } catch (error) {

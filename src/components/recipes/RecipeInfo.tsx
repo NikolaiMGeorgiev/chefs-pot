@@ -15,11 +15,12 @@ export default function RecipeInfo({
         <div className="recipe-summary__info-container">
             <div className="recipe-summary__info">
                 <FavouriteIcon />
-                {favouriteCount ?? 0}
+                <span>{favouriteCount ?? 0}</span>
+                
             </div>
             <div className="recipe-summary__info">
                 <DateIcon />
-                {getFormatedDate(created)}
+                <span>{getFormatedDate(created)}</span>
             </div>
         </div>
     )

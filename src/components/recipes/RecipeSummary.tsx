@@ -27,7 +27,7 @@ export default function RecipeSummary({
                 <FavouriteButton recipeId={id} isFavouriteInitial={favourite} />
             }
             <SingleRowTitle title={title} Header="h3" />
-            <section className="recipe-summary__container">
+            <section className="recipe-summary__container" aria-label="Recipe Ingredients">
                 <img src={`/files/${image}`} />
                 <IngredientsSummary ingredients={ingredients} spices={spices} />
             </section>

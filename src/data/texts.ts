@@ -1,0 +1,1 @@
+export const NO_RECIPES = "No recipes found.";

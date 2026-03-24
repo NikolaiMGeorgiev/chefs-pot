@@ -17,9 +17,9 @@ export default function Menu() {
 
     return (
         <div id="menu" className={isExpanded ? "expanded" : ""}>
-            <div id="menu__icon-container" onClick={() => setIsExpanded(!isExpanded)}>
+            <button id="menu__icon-container" onClick={() => setIsExpanded(!isExpanded)} aria-expanded={isExpanded}>
                 <MenuIcon />
-            </div>
+            </button>
             <div id="menu__container">
                 <h2>Menu</h2>
                 <nav>
@@ -42,24 +42,25 @@ type LinksDataType = {
     }
 }
 
+export const linksData: LinksDataType = {
+    "/": {
+        linkName: "all-recipes",
+        icon: <AllRecipesIcon />,
+        text: "All Recipes"
+    }, 
+    "/my-recipes": {
+        linkName: "my-recipes",
+        icon: <MyRecipesIcon />,
+        text: "My Recipes"
+    }, 
+    "/profile": {
+        linkName: "profile",
+        icon: <ProfileIcon />,
+        text: "Profile"
+    }
+};
+
 function MenuLink({ href, isActive }: { href: string, isActive: boolean }) {
-    const linksData: LinksDataType = {
-        "/": {
-            linkName: "all-recipes",
-            icon: <AllRecipesIcon />,
-            text: "All Recipes"
-        }, 
-        "/my-recipes": {
-            linkName: "my-recipes",
-            icon: <MyRecipesIcon />,
-            text: "My Recipes"
-        }, 
-        "/profile": {
-            linkName: "profile",
-            icon: <ProfileIcon />,
-            text: "Profile"
-        }
-    };
     const navigator = useNavigate();
     const linkData = linksData[href] ? linksData[href] : linksData['/'] as LinksDataType[keyof LinksDataType];
 

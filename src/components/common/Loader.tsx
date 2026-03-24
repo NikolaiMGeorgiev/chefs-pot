@@ -2,7 +2,7 @@ import "../../styles/loader.css";
 
 export default function Loader() {
     return (
-        <div className="loader">
+        <div className="loader" data-testid="loader">
             <span className="loader__center"></span>
             <span className="loader__dot dot-1"></span>
             <span className="loader__dot dot-2"></span>

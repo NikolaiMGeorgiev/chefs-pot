@@ -10,15 +10,15 @@ type Props = {
 export default function FavouriteButton({ recipeId, isFavouriteInitial }: Props) {
     const [isFavourite, setIsFavourite] = useState(isFavouriteInitial);
 
-    const handleClick = (e: UIEvent<HTMLDivElement>) => {
+    const handleClick = (e: UIEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         setIsFavourite(!isFavourite);
         sendFavourite(recipeId, isFavourite ? "remove" : "add");
     }
 
     return (
-        <div className={isFavourite ? "favourite-btn active" : "favourite-btn"} onClick={handleClick}>
+        <button className={isFavourite ? "favourite-btn active" : "favourite-btn"} onClick={handleClick}>
             <FavouriteIcon />
-        </div>
+        </button>
     )
 }
