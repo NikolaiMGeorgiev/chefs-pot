@@ -26,6 +26,7 @@ export default function FilteredIngredients({ filter, dispatch }: Props) {
         content = filteredIngredients
             .map(ingredient => 
                 <IngredientButton 
+                    key={ingredient}
                     type={"add"} 
                     ingredient={ingredient} 
                     selectedIngredients={selectedIngredients}
@@ -36,7 +37,7 @@ export default function FilteredIngredients({ filter, dispatch }: Props) {
     return (
         <div id="filtered-ingredients__suggestions-wrapper" className="filtered-ingredients__section">
             <h3>Select ingredients:</h3>
-            <div id="filtered-ingredients__suggestions-container">
+            <div id="filtered-ingredients__suggestions-container" data-testid="suggested-ingredients">
                 {content}
             </div>
         </div>

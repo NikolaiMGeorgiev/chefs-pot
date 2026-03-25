@@ -48,6 +48,7 @@ export default function RecipeTypeSelector({ selectedTypes, setSelectedTypes }: 
             <span>Recipe types: </span>
             {types.map(typeData => 
                 <button 
+                    key={typeData.type}
                     className={typeData.isSelected ? "button selected" : "button"}
                     data-type={typeData.type} 
                     type="button"

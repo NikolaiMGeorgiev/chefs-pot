@@ -14,6 +14,7 @@ export default function SelectedIngredients({ selectedIngredients, dispatch }: P
         content = selectedIngredients
             .map(ingredient => 
                 <IngredientButton 
+                    key={ingredient}
                     type={"remove"} 
                     ingredient={ingredient} 
                     selectedIngredients={selectedIngredients}
@@ -24,7 +25,7 @@ export default function SelectedIngredients({ selectedIngredients, dispatch }: P
     return (
         <div id="filtered-ingredients__selected-wrapper" className="filtered-ingredients__section">
             <h3>Selected ingredients:</h3>
-            <div id="filtered-ingredients__selected-container">
+            <div id="filtered-ingredients__selected-container" data-testid="selected-ingredients">
                 {content}
             </div>
         </div>

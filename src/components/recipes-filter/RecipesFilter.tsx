@@ -42,19 +42,19 @@ export default function RecipesFilter({
 
     const getFilterIcon = (type: "open" | "close") => {
         return (
-            <div 
+            <button 
                 className={`recipe-filter__filter-icon ${type}`} 
                 onClick={() => dispatch({type: "toggle"})}
             >
                { type == "close" ? <ExIcon /> : <FilterIcon /> }
-            </div>
+            </button>
         )
     }
 
     return (
         <div id="recipe-filter">
             { !filter.isExpanded && getFilterIcon("open") }
-            <div id="recipe-filter__wrapper" className={filter.isExpanded ? "expanded" : ""}>
+            <div id="recipe-filter__wrapper" className={filter.isExpanded ? "expanded" : ""} data-testid="recipe-filter">
                 <h2>Filter</h2>
                 { getFilterIcon("close") }
                 <div id="recipe-filter__container">
